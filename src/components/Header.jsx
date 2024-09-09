@@ -1,16 +1,23 @@
-
-
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 
 const Header = () => {
   return (
     <div>
-      <span>Logo</span>
+      <NavLink to='/'>Logo</NavLink>
       <ul>
-        <li>Builds</li>
-        <li>Parts</li>
-        <li>Rides</li>
-        <li>Maintenance</li>
+        <li>
+          <NavLink to='/builds'>Builds</NavLink>
+        </li>
+        <li>
+          <NavLink to='/parts'>Parts</NavLink>
+        </li>
+        <li>
+          <NavLink to='/rides'>Rides</NavLink>
+        </li>
+        <li>
+          <NavLink to='/maintenance'>Maintenance</NavLink>
+        </li>
       </ul>
     </div>
   )
