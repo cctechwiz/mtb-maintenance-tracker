@@ -246,6 +246,7 @@ PartRide.init(
   }
 );
 
+// Feature may be unnecessary
 class RideCondition extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -265,6 +266,30 @@ RideCondition.init(
   },
   {
     modelName: 'ride_condition', // Should this be camelCase or snake_case?
+    sequelize: db,
+  }
+);
+
+// Feature may be unnecessary 
+class RideStyles extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+RideStyles.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'ride_style', // Should this be camelCase or snake_case?
     sequelize: db,
   }
 );
