@@ -227,12 +227,12 @@ Ride.init(
 );
 
 // Is this an association table? Is it necessary to make when using sequelize?
-class PartRides extends Model {
+class PartRide extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   };
 };
-PartRides.init(
+PartRide.init(
   {
     id: {
       type: DataTypes.INTEGER,
