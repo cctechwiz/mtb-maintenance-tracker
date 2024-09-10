@@ -138,7 +138,7 @@ PartType.init(
     }
   },
   {
-    modelName: 'part_type', // Should this be camelCase or snake_case?
+    modelName: 'part_type',
     sequelize: db,
   }
 );
@@ -169,7 +169,7 @@ Service.init(
   }
 );
 
-// // Is this an association table? Is it necessary to make when using sequelize?
+// // Not needed with '.belongsToMany' relationship with Build and Part
 // class Installation extends Model { 
 //   [util.inspect.custom]() {
 //     return this.toJSON();
@@ -226,7 +226,7 @@ Ride.init(
   }
 );
 
-// // Is this an association table? Is it necessary to make when using sequelize?
+// // Not needed with '.belongsToMany' relationship with Part and Ride
 // class PartRide extends Model {
 //   [util.inspect.custom]() {
 //     return this.toJSON();
@@ -241,7 +241,7 @@ Ride.init(
 //     },
 //   },
 //   {
-//     modelName: 'part_rides', // Should this be camelCase or snake_case?
+//     modelName: 'part_rides',
 //     sequelize: db,
 //   }
 // );
@@ -265,7 +265,7 @@ RideCondition.init(
     },
   },
   {
-    modelName: 'ride_condition', // Should this be camelCase or snake_case?
+    modelName: 'ride_condition',
     sequelize: db,
   }
 );
