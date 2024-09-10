@@ -19,6 +19,9 @@ const Header = () => {
           <NavLink to='/maintenance'>Maintenance</NavLink>
         </li>
         <li>
+          <NavLink to='/settings'>User Settings</NavLink>
+        </li>
+        <li>
           <NavLink to='/auth'>Login</NavLink>
         </li>
       </ul>
