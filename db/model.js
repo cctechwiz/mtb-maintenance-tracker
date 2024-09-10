@@ -241,7 +241,30 @@ PartRide.init(
     },
   },
   {
-    modelName: 'part_rides', // Should this be a STRING? Is there a way to limit digits for an INTEGER?
+    modelName: 'part_rides', // Should this be camelCase or snake_case?
+    sequelize: db,
+  }
+);
+
+class RideCondition extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+RideCondition.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    modelName: 'ride_condition', // Should this be camelCase or snake_case?
     sequelize: db,
   }
 );
