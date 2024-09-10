@@ -120,3 +120,26 @@ Part.init(
   }
 );
 
+class PartType extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+PartType.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'part_type', // Should this be camelCase or snake_case?
+    sequelize: db,
+  }
+);
+
