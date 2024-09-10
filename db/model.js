@@ -169,3 +169,22 @@ Service.init(
   }
 );
 
+// Is this an association table? Is it necessary to make when using sequelize?
+class Installation extends Model { 
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+Installation.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+  },
+  {
+    modelName: 'installation',
+    sequelize: db,
+  }
+);
