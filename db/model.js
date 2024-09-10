@@ -188,3 +188,41 @@ Installation.init(
     sequelize: db,
   }
 );
+
+class Ride extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+Ride.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    nickname: {
+      type: DataTypes.STRING,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    location: {
+      type: DataTypes.STRING
+    },
+    miles: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    minutes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'ride',
+    sequelize: db,
+  }
+);
+
