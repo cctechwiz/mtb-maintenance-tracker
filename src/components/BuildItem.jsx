@@ -7,10 +7,7 @@ const BuildItem = () => {
     <div>
       <h2>Downhill</h2>
       <CategoryItem />
-      <PartItem />
-      <PartItem />
       <CategoryItem />
-      <PartItem />
     </div>
   )
 }
