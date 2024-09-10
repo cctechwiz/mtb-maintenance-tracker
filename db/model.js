@@ -34,6 +34,10 @@ User.init(
       type: DataTypes.BOOLEAN,
       allowNull: true, // Should this be required
     }
+  },
+  {
+    modelName: 'user',
+    sequelize: db,
   }
 );
 
@@ -49,6 +53,24 @@ Build.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true, // if Null, set to frame name?
+    },
+    isPrimary: {
+      type: DataTypes.BOOLEAN,
+    },
+    isActive: { // Might not be necessary
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    notes: {
+      type: DataTypes.TEXT,
+    }
+  },
+  {
+    modelName: 'build',
+    sequelize: db,
   }
-)
+);
+
