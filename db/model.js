@@ -401,3 +401,12 @@ StyleMultiplier.belongsTo(RideStyle, { foreignKey: 'styleId' });
 // StyleMultipliers foreign key to Users
 User.hasMany(StyleMultiplier, { foreignKey: 'userId' });
 StyleMultiplier.belongsTo(User, { foreignKey: 'userId' });
+
+if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
+  console.log('Syncing to db...');
+  // await db.sync({ force: true }); // uncomment to update schema
+  await db.sync();
+  console.log('Finished syncing database.');
+};
+
+export { User, Build, Part, PartType, Service, Ride, RideCondition, RideStyle, ConditionMultiplier, StyleMultiplier };
