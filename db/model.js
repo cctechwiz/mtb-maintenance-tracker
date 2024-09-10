@@ -293,3 +293,51 @@ RideStyles.init(
     sequelize: db,
   }
 );
+
+// Only necessary if RideCondition feature is implemented.
+class ConditionMultiplier extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+ConditionMultiplier.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    multiplier: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'condition_multiplier',
+    sequelize: db,
+  }
+);
+
+// Only necessary if RideStyle feature is implemented.
+class StyleMultiplier extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+StyleMultiplier.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    multiplier: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'style_multiplier',
+    sequelize: db,
+  }
+);
