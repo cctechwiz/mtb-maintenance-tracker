@@ -55,14 +55,13 @@ Build.init(
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: true, // if Null, set to frame name?
+      allowNull: false, // if Null, set to frame name?
     },
     isPrimary: {
       type: DataTypes.BOOLEAN,
     },
     isActive: { // Might not be necessary
       type: DataTypes.BOOLEAN,
-      allowNull: true,
     },
     notes: {
       type: DataTypes.TEXT,
@@ -70,6 +69,53 @@ Build.init(
   },
   {
     modelName: 'build',
+    sequelize: db,
+  }
+);
+
+class Part extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+Part.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastServiced: {
+      type: DataTypes.DATE, // DATE or DATEONLY?
+    },
+    milesInterval: {
+      type: DataTypes.INTEGER, // Is there ever a case where this would be a float?
+    },
+    hoursInterval: {
+      type: DataTypes.INTEGER
+    },
+    mfgPartNum: {
+      type: DataTypes.STRING,
+    },
+    serialNum: {
+      type: DataTypes.STRING, 
+    },
+    brand: {
+      type: DataTypes.STRING,
+    },
+    modelYear: {
+      type: DataTypes.INTEGER, // Should this be a STRING? Is there a way to limit digits for an INTEGER?
+    },
+    notes: {
+      type: DataTypes.TEXT,
+    }
+  },
+  {
+    modelName: 'part',
     sequelize: db,
   }
 );
