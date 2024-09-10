@@ -169,25 +169,25 @@ Service.init(
   }
 );
 
-// Is this an association table? Is it necessary to make when using sequelize?
-class Installation extends Model { 
-  [util.inspect.custom]() {
-    return this.toJSON();
-  };
-};
-Installation.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-  },
-  {
-    modelName: 'installation',
-    sequelize: db,
-  }
-);
+// // Is this an association table? Is it necessary to make when using sequelize?
+// class Installation extends Model { 
+//   [util.inspect.custom]() {
+//     return this.toJSON();
+//   };
+// };
+// Installation.init(
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//     },
+//   },
+//   {
+//     modelName: 'installation',
+//     sequelize: db,
+//   }
+// );
 
 class Ride extends Model {
   [util.inspect.custom]() {
@@ -226,25 +226,25 @@ Ride.init(
   }
 );
 
-// Is this an association table? Is it necessary to make when using sequelize?
-class PartRide extends Model {
-  [util.inspect.custom]() {
-    return this.toJSON();
-  };
-};
-PartRide.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-  },
-  {
-    modelName: 'part_rides', // Should this be camelCase or snake_case?
-    sequelize: db,
-  }
-);
+// // Is this an association table? Is it necessary to make when using sequelize?
+// class PartRide extends Model {
+//   [util.inspect.custom]() {
+//     return this.toJSON();
+//   };
+// };
+// PartRide.init(
+//   {
+//     id: {
+//       type: DataTypes.INTEGER,
+//       primaryKey: true,
+//       autoIncrement: true,
+//     },
+//   },
+//   {
+//     modelName: 'part_rides', // Should this be camelCase or snake_case?
+//     sequelize: db,
+//   }
+// );
 
 // Feature may be unnecessary
 class RideCondition extends Model {
@@ -271,12 +271,12 @@ RideCondition.init(
 );
 
 // Feature may be unnecessary 
-class RideStyles extends Model {
+class RideStyle extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
   };
 };
-RideStyles.init(
+RideStyle.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -341,3 +341,63 @@ StyleMultiplier.init(
     sequelize: db,
   }
 );
+
+// Builds foreign key to Users
+User.hasMany(Build, { foreignKey: 'userId' });
+Build.belongsTo(User, { foreignKey: 'userId' })
+
+// Parts foreign key to Users
+User.hasMany(Part, { foreignKey: 'userId' });
+Part.belongsTo(User, { foreignKey: 'userId' });
+
+// Parts foreign key to PartType
+PartType.hasMany(Part, { foreignKey: 'typeId' });
+Part.belongsTo(PartType, { foreignKey: 'typeId' });
+
+// Services foreign key to Parts
+Part.hasMany(Service, { foreignKey: 'partId' });
+Service.belongsTo(Part, { foreignKey: 'partId' });
+
+// Rides foreign key to Users
+User.hasMany(Ride, { foreignKey: 'userId' });
+Ride.belongsTo(User, { foreignKey: 'userId' });
+
+// OPTIONAL: Rides foreign key to RideConditions
+RideCondition.hasMany(Ride, { foreignKey: 'conditionId' });
+Ride.belongsTo(RideCondition, { foreignKey: 'conditionId' });
+
+// OPTIONAL: Rides foreign key to RideStyles
+RideStyle.hasMany(Ride, { foreignKey: 'styleId' });
+Ride.belongsTo(RideStyle, { foreignKey: 'styleId' });
+
+// Installations association table
+Part.belongsToMany(Build, { through: 'installation' });
+Build.belongsToMany(Part, { through: 'installation' });
+
+// PartRides association table
+Ride.belongsToMany(Part, { through: 'partRide' });
+Part.belongsToMany(Ride, { through: 'partRide' });
+
+// ConditionMultipliers foreign key to PartType
+PartType.hasMany(ConditionMultiplier, { foreignKey: 'typeId' });
+ConditionMultiplier.belongsTo(PartType, { foreignKey: 'typeId' });
+
+// ConditionMultipliers foreign key to RideConditions
+RideCondition.hasMany(ConditionMultiplier, { foreignKey: 'conditionId' });
+ConditionMultiplier.belongsTo(RideCondition, { foreignKey: 'conditionId' });
+
+// ConditionMultipliers foreign key to Users
+User.hasMany(ConditionMultiplier, { foreignKey: 'userId' });
+ConditionMultiplier.belongsTo(User, { foreignKey: 'userId' });
+
+// StyleMultipliers foreign key to PartType
+PartType.hasMany(StyleMultiplier, { foreignKey: 'typeId' });
+StyleMultiplier.belongsTo(PartType, { foreignKey: 'typeId' });
+
+// StyleMultipliers foreign key to RideStyle
+RideStyle.hasMany(StyleMultiplier, { foreignKey: 'styleId' });
+StyleMultiplier.belongsTo(RideStyle, { foreignKey: 'styleId' });
+
+// StyleMultipliers foreign key to Users
+User.hasMany(StyleMultiplier, { foreignKey: 'userId' });
+StyleMultiplier.belongsTo(User, { foreignKey: 'userId' });
