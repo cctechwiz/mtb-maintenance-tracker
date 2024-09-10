@@ -143,3 +143,29 @@ PartType.init(
   }
 );
 
+class Service extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+Service.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    notes: { // Should this allow null?
+      type: DataTypes.TEXT,
+    }
+  },
+  {
+    modelName: 'service',
+    sequelize: db,
+  }
+);
+
