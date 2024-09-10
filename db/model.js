@@ -226,3 +226,22 @@ Ride.init(
   }
 );
 
+// Is this an association table? Is it necessary to make when using sequelize?
+class PartRides extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+PartRides.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+  },
+  {
+    modelName: 'part_rides', // Should this be a STRING? Is there a way to limit digits for an INTEGER?
+    sequelize: db,
+  }
+);
