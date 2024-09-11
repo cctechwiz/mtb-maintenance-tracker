@@ -35,8 +35,8 @@ const LoginForm = ({ setShowRegister }) => {
       
       // navigates to index (dashboard)
       navigate('/');
-    }
-  }
+    };
+  };
 
   return (
     <>
@@ -46,7 +46,6 @@ const LoginForm = ({ setShowRegister }) => {
       
       <form onSubmit={handleLogin}>
         <div>
-          {/* <label htmlFor="email">Email:</label> */}
           <input
             value={email}
             type="email"
@@ -57,7 +56,6 @@ const LoginForm = ({ setShowRegister }) => {
         </div>
 
         <div>
-          {/* <label htmlFor='password'>Password:</label> */}
           <input
             value={password}
             type="password"
@@ -74,7 +72,6 @@ const LoginForm = ({ setShowRegister }) => {
 
       <div>
         <span>New user?</span>
-        {/* QUESTION: Should I use a React state or Redux state determine showRegister??? */}
         <button onClick={() => setShowRegister(true)}>Register Here</button> 
       </div>
     </>
