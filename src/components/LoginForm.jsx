@@ -26,7 +26,7 @@ const LoginForm = ({ setShowRegister }) => {
       // saves userId to redux
       dispatch({
         type: 'USER_AUTH',
-        payload: userId
+        payload: res.data.userId
       })
 
       // clears input fields
