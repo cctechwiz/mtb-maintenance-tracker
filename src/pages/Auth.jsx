@@ -1,21 +1,16 @@
-import React from 'react'
+import { useState } from 'react'
+import LoginForm from '../components/LoginForm.jsx';
+import RegisterForm from '../components/RegisterForm.jsx';
 
 const Auth = () => {
-  return (
-    <>
-      <h1>Login</h1>
-      <form>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id='email'/>
-        </div>
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showRegister, setShowRegister] = useState(false)
 
-        <div>
-          <label htmlFor='password'>Password:</label>
-          <input type="password" id='password'/>
-        </div>
-      </form>
-    </>
+  return showRegister ? (
+    <RegisterForm setShowRegister={setShowRegister} />
+  ) : (
+    <LoginForm setShowRegister={setShowRegister} />
   )
 }
 
