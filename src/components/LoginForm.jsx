@@ -1,8 +1,34 @@
+import axios from 'axios';
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ setShowRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const bodyObj = {
+      email: email,
+      password: password
+    };
+
+    const res = await axios.post("/api/login", bodyObj);
+    
+    // TODO: save userId to Redux state
+
+    if (res.data.success) {
+      // clears input fields
+      setEmail('');
+      setPassword('');
+      
+      // navigates to index (dashboard)
+      navigate('/');
+    }
+  }
 
   return (
     <>
@@ -10,7 +36,7 @@ const LoginForm = ({ setShowRegister }) => {
         <h1>Login</h1>
       </div>
       
-      <form>
+      <form onSubmit={handleLogin}>
         <div>
           {/* <label htmlFor="email">Email:</label> */}
           <input
@@ -31,6 +57,10 @@ const LoginForm = ({ setShowRegister }) => {
             placeholder='password'
             onChange={(e) => setPassword(e.target.value)}
           />
+        </div>
+
+        <div>
+          <input type="submit" />
         </div>
       </form>
 
