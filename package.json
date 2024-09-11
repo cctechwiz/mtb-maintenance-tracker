@@ -4,10 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "nodemon server/server.js -w server/server.js -w src",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "initdb": "dropdb --if-exists mtbmt && createdb mtbmt",
+    "seed": "node db/seed.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
