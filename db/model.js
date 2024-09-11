@@ -3,7 +3,7 @@ import connectToDB from "./db.js";
 import url from 'url';
 import util from 'util';
 
-const db = await connectToDB('postgresql:///mtbmt');
+export const db = await connectToDB('postgresql:///mtbmt');
 
 class User extends Model {
   [util.inspect.custom]() {
