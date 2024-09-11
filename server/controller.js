@@ -41,7 +41,8 @@ export const handlerFunctions = {
 
     return res.send({
       message: 'user logged in',
-      success: true
+      success: true,
+      userId: user.id
     });
   },
 
