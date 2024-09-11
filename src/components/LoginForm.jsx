@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ setShowRegister }) => {
@@ -7,6 +8,9 @@ const LoginForm = ({ setShowRegister }) => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.userId)
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,10 +21,14 @@ const LoginForm = ({ setShowRegister }) => {
     };
 
     const res = await axios.post("/api/login", bodyObj);
-    
-    // TODO: save userId to Redux state
 
     if (res.data.success) {
+      // saves userId to redux
+      dispatch({
+        type: 'USER_AUTH',
+        payload: userId
+      })
+
       // clears input fields
       setEmail('');
       setPassword('');
