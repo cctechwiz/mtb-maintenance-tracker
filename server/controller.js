@@ -5,13 +5,13 @@ export const handlerFunctions = {
   sessionCheck: async (req, res) => {
     if (req.session.userId) {
       return res.send({
-        message: 'user is still logged in',
+        message: 'User is still logged in',
         success: true,
         userId: req.session.userId
       })
     } else {
       return res.send({
-        message: 'no user logged in',
+        message: 'No user is logged in',
         success: false,
       })
     }
@@ -33,7 +33,7 @@ export const handlerFunctions = {
     // if email already exists in db:
     if (user) {
       return res.send({
-        message: 'Email already used by other user',
+        message: 'Email is already taken',
         success: false
       });
     };
@@ -83,7 +83,7 @@ export const handlerFunctions = {
     // if 'user' is falsy (no user was found in db)
     if (!user) {
       return res.send({
-        message: 'no user found',
+        message: 'User with that email was not found',
         success: false
       });
     };
@@ -91,7 +91,7 @@ export const handlerFunctions = {
     // if hash of password from req.body does not match password hash from db
     if (!bcryptjs.compareSync(password, user.password)) {
       return res.send({
-        message: 'password is incorrect',
+        message: 'Password is incorrect',
         success: false
       });
     };
@@ -100,7 +100,7 @@ export const handlerFunctions = {
     req.session.userId = user.id
 
     return res.send({
-      message: 'user logged in',
+      message: 'User logged in successfully',
       success: true,
       userId: user.id
     });
@@ -110,7 +110,7 @@ export const handlerFunctions = {
     req.session.destroy();
 
     return res.send({
-      message: 'user logged out',
+      message: 'User logged out successfully',
       success: true
     })
   }
