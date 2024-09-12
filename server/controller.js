@@ -58,6 +58,11 @@ export const handlerFunctions = {
   },
 
   logout: async (req, res) => {
+    req.session.destroy();
 
+    return res.send({
+      message: 'user logged out',
+      success: true
+    })
   }
 }
