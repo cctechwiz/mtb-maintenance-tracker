@@ -18,7 +18,56 @@ export const handlerFunctions = {
   },
 
   register: async (req, res) => {
+    const { email, password, name } = req.body;
+    console.log()
+    console.log(`req.body:`, req.body)
+    console.log()
 
+    // Check if email already exists in db
+    let user = await User.findOne({
+      where: {
+        email
+      }
+    });
+
+    // if email already exists in db:
+    if (user) {
+      return res.send({
+        message: 'Email already used by other user',
+        success: false
+      });
+    };
+
+    const passwordHash = bcryptjs.hashSync(password, bcryptjs.genSaltSync(10));
+
+    // If email hasn't already been taken, add new user to db
+    await User.create({
+      email,
+      password: passwordHash,
+      name
+    });
+
+    // Check if user was added to db
+    user = await User.findOne({
+      where: {
+        email
+      }
+    });
+
+    // If no user is found:
+    if (!user) {
+      return res.send({
+        message: 'Registration failed',
+        success: false
+      });
+    };
+
+    // If user was registered successfully:
+    return res.send({
+      message: 'User registered successfully',
+      success: true,
+      userId: user.id
+    })
   },
 
   login: async (req, res) => {
