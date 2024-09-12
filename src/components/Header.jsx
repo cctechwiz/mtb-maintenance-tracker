@@ -1,15 +1,29 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios';
 
 const Header = () => {
   const userId = useSelector((state) => state.userId);
 
-  console.log(`USERID:`, userId)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    const res = await axios.get('/api/logout');
+
+    if (res.data.success) {
+      dispatch({
+        type: 'LOGOUT'
+      })
+
+      navigate('/auth');
+    };
+  };
   
   return (
     <div>
-      <NavLink to='/'>Logo</NavLink>
+      <NavLink to='/'>MTB Maintenance Tracker</NavLink>
       {userId &&
         <ul>
           <li>
@@ -28,7 +42,7 @@ const Header = () => {
             <NavLink to='/settings'>User Settings</NavLink>
           </li>
           <li>
-            <NavLink to='/auth'>Login</NavLink>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         </ul>
       }
