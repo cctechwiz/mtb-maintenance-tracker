@@ -34,7 +34,6 @@ function App() {
 
   return (
     <>
-      MTB Maintenance Tracker
       <Header />
       
       <main>
