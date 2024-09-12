@@ -30,6 +30,11 @@ const RegisterForm = ({ setShowRegister }) => {
         payload: res.data.userId
       });
 
+      // clears input fields
+      setEmail('');
+      setPassword('');
+      setName('');
+
       navigate('/')
     } else {
       // TODO: change to toastify
