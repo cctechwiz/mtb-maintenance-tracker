@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = ({ setShowRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const LoginForm = ({ setShowRegister }) => {
       dispatch({
         type: 'USER_AUTH',
         payload: res.data.userId
-      })
+      });
 
       // clears input fields
       setEmail('');
@@ -35,6 +36,9 @@ const LoginForm = ({ setShowRegister }) => {
       
       // navigates to index (dashboard)
       navigate('/');
+    } else {
+      // TODO: change to toastify
+      setErrorMessage(res.data.message)
     };
   };
 
@@ -42,6 +46,13 @@ const LoginForm = ({ setShowRegister }) => {
     <>
       <div>
         <h1>Login</h1>
+      </div>
+
+      <div>
+        {/* TODO: change to toastify */}
+        {errorMessage &&
+          <p>{errorMessage}</p>
+        }
       </div>
       
       <form onSubmit={handleLogin}>
