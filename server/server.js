@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import session from 'express-session';
 import ViteExpress from 'vite-express';
 
-import { handlerFunctions } from './controller.js';
+import { handlerFunctions } from './authCtrl.js';
 
 const app = express();
 const port = '8080';
