@@ -3,7 +3,18 @@ import bcryptjs from 'bcryptjs';
 
 export const handlerFunctions = {
   sessionCheck: async (req, res) => {
-
+    if (req.session.userId) {
+      return res.send({
+        message: 'user is still logged in',
+        success: true,
+        userId: req.session.userId
+      })
+    } else {
+      return res.send({
+        message: 'no user logged in',
+        success: false,
+      })
+    }
   },
 
   register: async (req, res) => {
