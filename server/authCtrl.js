@@ -1,7 +1,7 @@
 import { User } from "../db/model.js";
 import bcryptjs from 'bcryptjs';
 
-export const handlerFunctions = {
+export const authFuncs = {
   sessionCheck: async (req, res) => {
     if (req.session.userId) {
       return res.send({
