@@ -40,7 +40,7 @@ Cockpit:
   - dropper post lever
   - pedals (is this in the right category?)
 
-Brakes:
+Brakes:   (should I add functionality for mechanical brakes)
 (do these need to be separate? how do you differentiate between a service on one vs the other?)
   - front brakes:
     -- levers
@@ -53,7 +53,7 @@ Brakes:
     -- calipers
     -- rotors
 
-Groupset:
+Groupset:   (should I add functionality for e-mtb bikes)
   - shifter(s)
   - if mechanical:
     -- housing and cable(s)
@@ -71,36 +71,38 @@ Wheels:
     -- spokes
     -- tire
     if tubes:
-      --- tube
+      --- tube (not added yet)
     if tubeless:
       --- valve stem
       --- sealant
     -- valve core
-    -- front axel
+    -- front axle
   - rear wheel
     -- rim
     -- hub
     -- spokes
     if tubes:
-      --- tube
+      --- tube (not added yet)
     if tubeless:
       --- valve stem
       --- sealant
     -- valve core
     -- freehub
-    -- rear axel
+    -- rear axle
 */
 
-const partTypes = ['frame', 'fork', 'suspension', 'cockpit', 'brakes', 'groupset', 'wheels']
+const partCategories = ['frame', 'fork', 'suspension', 'cockpit', 'brakes', 'groupset', 'wheels'];
 
-const parts = { 
+const partsTypes = { 
   frame: ['frame', 'bottomBracket', 'headset', 'derailleurHanger'],
   fork: ['fork'],
   suspension: ['shock', 'linkageBearings'],
   cockpit: ['stem', 'handlebars', 'grips', 'saddle', 'seatpost', 'dropperLever', 'pedals'],
   brakes: ['frontLever', 'rearLever', 'frontBrakeLine', 'rearBrakeLine', 'frontCaliper', 'rearCaliper', 'frontRotor', 'rearRotor'],
-  groupset: [],
-  wheels: []
-}
+  groupset: ['shifter', 'housingAndCable', 'derailleur', 'crank', 'chainring', 'chain'],
+  wheels: ['frontRim', 'rearRim', 'frontHub', 'rearHub', 'frontWheelSpokes', 'rearWheelSpokes', 'frontTire', 'rearTire', 'frontValveStem', 'rearValveStem', 'frontTireSealant', 'rearTireSealant', 'frontValveCore', 'rearValveCore', 'frontAxle', 'rearAxle']
+};
+
+
 
 await db.close();
