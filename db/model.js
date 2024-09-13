@@ -120,6 +120,29 @@ Part.init(
   }
 );
 
+class PartCategory extends Model {
+  [util.inspect.custom]() {
+    return this.toJSON();
+  };
+};
+PartCategory.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
+  },
+  {
+    modelName: 'part_category',
+    sequelize: db,
+  }
+);
+
 class PartType extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -350,6 +373,10 @@ Build.belongsTo(User, { foreignKey: 'userId' })
 User.hasMany(Part, { foreignKey: 'userId' });
 Part.belongsTo(User, { foreignKey: 'userId' });
 
+// Parts foreign key to PartCategory
+PartCategory.hasMany(Part, { foreignKey: 'categoryId'});
+Part.belongsTo(PartCategory, { foreignKey: 'categoryId'})
+
 // Parts foreign key to PartType
 PartType.hasMany(Part, { foreignKey: 'typeId' });
 Part.belongsTo(PartType, { foreignKey: 'typeId' });
@@ -371,12 +398,12 @@ RideStyle.hasMany(Ride, { foreignKey: 'styleId' });
 Ride.belongsTo(RideStyle, { foreignKey: 'styleId' });
 
 // Installations association table
-Part.belongsToMany(Build, { through: 'installation' });
-Build.belongsToMany(Part, { through: 'installation' });
+Part.belongsToMany(Build, { through: 'installations' });
+Build.belongsToMany(Part, { through: 'installations' });
 
 // PartRides association table
-Ride.belongsToMany(Part, { through: 'partRide' });
-Part.belongsToMany(Ride, { through: 'partRide' });
+Ride.belongsToMany(Part, { through: 'part_rides' });
+Part.belongsToMany(Ride, { through: 'part_rides' });
 
 // ConditionMultipliers foreign key to PartType
 PartType.hasMany(ConditionMultiplier, { foreignKey: 'typeId' });
