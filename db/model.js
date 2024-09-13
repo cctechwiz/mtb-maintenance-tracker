@@ -373,9 +373,9 @@ Build.belongsTo(User, { foreignKey: 'userId' })
 User.hasMany(Part, { foreignKey: 'userId' });
 Part.belongsTo(User, { foreignKey: 'userId' });
 
-// Parts foreign key to PartCategory
-PartCategory.hasMany(Part, { foreignKey: 'categoryId'});
-Part.belongsTo(PartCategory, { foreignKey: 'categoryId'})
+// PartsType foreign key to PartCategory
+PartCategory.hasMany(PartType, { foreignKey: 'categoryId'});
+PartType.belongsTo(PartCategory, { foreignKey: 'categoryId'})
 
 // Parts foreign key to PartType
 PartType.hasMany(Part, { foreignKey: 'typeId' });
@@ -436,4 +436,4 @@ if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
   console.log('Finished syncing database.');
 };
 
-export { User, Build, Part, PartType, Service, Ride, RideCondition, RideStyle, ConditionMultiplier, StyleMultiplier };
+export { User, Build, Part, PartCategory, PartType, Service, Ride, RideCondition, RideStyle, ConditionMultiplier, StyleMultiplier };
