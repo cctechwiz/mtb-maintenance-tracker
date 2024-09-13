@@ -3,7 +3,11 @@ import morgan from 'morgan';
 import session from 'express-session';
 import ViteExpress from 'vite-express';
 
-import { handlerFunctions } from './authCtrl.js';
+import { authFuncs } from './authCtrl.js';
+const { sessionCheck, register, login, logout } = authFuncs;
+
+import { buildFuncs } from './buildsCtrl.js';
+const { newBuild } = buildFuncs;
 
 const app = express();
 const port = '8080';
@@ -19,10 +23,14 @@ app.use(
   })
 );
 
-app.get('/api/session-check', handlerFunctions.sessionCheck);
-app.post('/api/login', handlerFunctions.login);
-app.get('/api/logout', handlerFunctions.logout);
-app.post('/api/register', handlerFunctions.register);
+// Auth requests
+app.get('/api/session-check', sessionCheck);
+app.post('/api/login', login);
+app.get('/api/logout', logout);
+app.post('/api/register', register);
+
+// Build requests
+app.post('/api/new-build', newBuild)
 
 ViteExpress.listen(app, port, () => {
   console.log(`Server running on http://localhost:${port}`)
