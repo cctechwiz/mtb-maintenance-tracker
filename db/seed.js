@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { db, User } from "./model.js";
+import { db, User, PartCategory, PartType } from "./model.js";
 import bcryptjs from 'bcryptjs';
 
 await db.sync({ force: true });
@@ -94,15 +94,26 @@ Wheels:
 const partCategories = ['frame', 'fork', 'suspension', 'cockpit', 'brakes', 'groupset', 'wheels'];
 
 const partsTypes = { 
-  frame: ['frame', 'bottomBracket', 'headset', 'derailleurHanger'],
+  frame: ['frame', 'bottom_bracket', 'headset', 'derailleur_hanger'],
   fork: ['fork'],
-  suspension: ['shock', 'linkageBearings'],
-  cockpit: ['stem', 'handlebars', 'grips', 'saddle', 'seatpost', 'dropperLever', 'pedals'],
-  brakes: ['frontLever', 'rearLever', 'frontBrakeLine', 'rearBrakeLine', 'frontCaliper', 'rearCaliper', 'frontRotor', 'rearRotor'],
-  groupset: ['shifter', 'housingAndCable', 'derailleur', 'crank', 'chainring', 'chain'],
-  wheels: ['frontRim', 'rearRim', 'frontHub', 'rearHub', 'frontWheelSpokes', 'rearWheelSpokes', 'frontTire', 'rearTire', 'frontValveStem', 'rearValveStem', 'frontTireSealant', 'rearTireSealant', 'frontValveCore', 'rearValveCore', 'frontAxle', 'rearAxle']
+  suspension: ['shock', 'linkage_bearings'],
+  cockpit: ['stem', 'handlebars', 'grips', 'saddle', 'seatpost', 'dropper_lever', 'pedals'],
+  brakes: ['front_lever', 'rear_lever', 'front_brake_line', 'rear_brake_line', 'front_caliper', 'rear_caliper', 'front_rotor', 'rear_rotor'],
+  groupset: ['shifter', 'housing_and_cable', 'derailleur', 'crank', 'chainring', 'chain'],
+  wheels: ['front_rim', 'rear_rim', 'front_hub', 'rear_hub', 'front_spokes', 'rear_spokes', 'front_tire', 'rear_tire', 'front_valve_stem', 'rear_valve_stem', 'front_sealant', 'rear_sealant', 'front_valve_core', 'rear_valve_core', 'front_axle', 'rear_axle']
 };
 
+for (const [key, value] of Object.entries(partsTypes)) {
+  const newCategory = await PartCategory.create({
+    name: key
+  });
 
+  for (const part of value) {
+    await PartType.create({
+      name: part,
+      categoryId: newCategory.id
+    })
+  }
+};
 
 await db.close();
