@@ -1,4 +1,7 @@
-const initialState = {};
+const initialState = {
+  userId: null,
+  builds: null
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -12,7 +15,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         userId: null
-      }  
+      }
+    
+    case 'UPDATE_BUILDS':
+      return {
+        ...state,
+        builds: action.payload
+      }
 
     default:
       return state;
