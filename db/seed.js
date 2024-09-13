@@ -4,11 +4,11 @@ import bcryptjs from 'bcryptjs';
 
 await db.sync({ force: true });
 
-const users = ['user1@test.com']
+const usersSeed = ['user1@test.com']
 
 const hashedPassword = bcryptjs.hashSync('test', bcryptjs.genSaltSync(10));
 
-for (const user of users) {
+for (const user of usersSeed) {
   await User.create({
     email: user.toLowerCase(),
     password: hashedPassword
@@ -93,7 +93,7 @@ Wheels:
 
 const partCategories = ['frame', 'fork', 'suspension', 'cockpit', 'brakes', 'groupset', 'wheels'];
 
-const partsTypes = { 
+const partsSeed = { 
   frame: ['frame', 'bottom_bracket', 'headset', 'derailleur_hanger'],
   fork: ['fork'],
   suspension: ['shock', 'linkage_bearings'],
@@ -103,11 +103,13 @@ const partsTypes = {
   wheels: ['front_rim', 'rear_rim', 'front_hub', 'rear_hub', 'front_spokes', 'rear_spokes', 'front_tire', 'rear_tire', 'front_valve_stem', 'rear_valve_stem', 'front_sealant', 'rear_sealant', 'front_valve_core', 'rear_valve_core', 'front_axle', 'rear_axle']
 };
 
-for (const [key, value] of Object.entries(partsTypes)) {
+for (const [key, value] of Object.entries(partsSeed)) {
+  // Creates new PartCategory entry from partsSeed keys and saves the return to newCategory
   const newCategory = await PartCategory.create({
     name: key
   });
 
+  // Creates part type for array values of key in partsSeed object
   for (const part of value) {
     await PartType.create({
       name: part,
