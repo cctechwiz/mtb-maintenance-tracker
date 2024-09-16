@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const NewBuildForm = ({ setBuildsData }) => {
   const [ name, setName ] = useState('');
+  const [ newPartsSelected, setNewPartsSelected ] = useState(true);
 
   const userId = useSelector((state) => state.userId)
 
@@ -12,7 +13,8 @@ const NewBuildForm = ({ setBuildsData }) => {
 
     const bodyObj = {
       buildName: name,
-      userId: userId
+      userId: userId,
+      createNewParts: newPartsSelected
     };
 
     const res = await axios.post('/api/new-build', bodyObj);
@@ -20,17 +22,37 @@ const NewBuildForm = ({ setBuildsData }) => {
     if (res.data.success) {
       setBuildsData(res.data.builds)
     }
+  };
+
+  const handleNewPartsChange = () => {
+    setNewPartsSelected(!newPartsSelected)
   }
 
   return (
     <form onSubmit={handleNewBuild}>
-      <input
-        value={name}
-        type="text" 
-        placeholder='Build name'
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input type="submit" />
+      <div>
+        <input
+          value={name}
+          type="text" 
+          placeholder='Build name'
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="create-new-parts">Create new parts for this build?</label>
+        <input
+          value={newPartsSelected}
+          type="checkbox"
+          checked={newPartsSelected}
+          id="create-new-parts"
+          onChange={handleNewPartsChange}
+        />
+      </div>
+
+      <div>
+        <input type="submit" />
+      </div>
     </form>
   )
 }
