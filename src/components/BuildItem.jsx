@@ -2,12 +2,10 @@ import React from 'react'
 import { CategoryItem } from './CategoryItem'
 import PartItem from './PartItem'
 
-const BuildItem = () => {
+const BuildItem = ({ name }) => {
   return (
     <div>
-      <h2>Downhill</h2>
-      <CategoryItem />
-      <CategoryItem />
+      <h2>{ name }</h2>
     </div>
   )
 }
