@@ -6,11 +6,11 @@ import ViteExpress from 'vite-express';
 import { authFuncs } from './authCtrl.js';
 const { sessionCheck, register, login, logout } = authFuncs;
 
-import { pageLoaderFuncs } from './pageLoaderCtrl.js';
-const { getDashboardData, getBuildsData } = pageLoaderFuncs;
+import { dashboardFuncs } from './dashboardCtrl.js';
+const { getDashboardData } = dashboardFuncs;
 
 import { buildFuncs } from './buildsCtrl.js';
-const { newBuild } = buildFuncs;
+const { getBuildsData, newBuild } = buildFuncs;
 
 const app = express();
 const port = '8080';
@@ -32,11 +32,11 @@ app.post('/api/login', login);
 app.get('/api/logout', logout);
 app.post('/api/register', register);
 
-// React Router loader requests
+// TODO: dasboard query handlerFunction
 app.get('/api/dashboard', getDashboardData)
-app.get('/api/builds', getBuildsData)
 
 // Build requests
+app.get('/api/builds', getBuildsData)
 app.post('/api/new-build', newBuild)
 
 ViteExpress.listen(app, port, () => {
