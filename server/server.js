@@ -6,6 +6,9 @@ import ViteExpress from 'vite-express';
 import { authFuncs } from './authCtrl.js';
 const { sessionCheck, register, login, logout } = authFuncs;
 
+import { pageLoaderFuncs } from './pageLoaderCtrl.js';
+const { getDashboardData, getBuildsData } = pageLoaderFuncs;
+
 import { buildFuncs } from './buildsCtrl.js';
 const { newBuild } = buildFuncs;
 
@@ -28,6 +31,10 @@ app.get('/api/session-check', sessionCheck);
 app.post('/api/login', login);
 app.get('/api/logout', logout);
 app.post('/api/register', register);
+
+// React Router loader requests
+app.get('/api/dashboard', getDashboardData)
+app.get('/api/builds', getBuildsData)
 
 // Build requests
 app.post('/api/new-build', newBuild)
