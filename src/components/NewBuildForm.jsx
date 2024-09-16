@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const NewBuildForm = () => {
+const NewBuildForm = ({ setBuildsData }) => {
   const [ name, setName ] = useState('');
-
-  const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.userId)
 
@@ -20,16 +18,8 @@ const NewBuildForm = () => {
     const res = await axios.post('/api/new-build', bodyObj);
 
     if (res.data.success) {
-      dispatch({
-        type: 'UPDATE_BUILDS',
-        payload: res.data.builds
-      })
+      setBuildsData(res.data.builds)
     }
-
-    // console.log(res.data.message)
-    // console.log(`BUILDS:`, res.data.builds)
-
-
   }
 
   return (
