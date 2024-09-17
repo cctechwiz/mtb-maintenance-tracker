@@ -2,15 +2,25 @@ import { User, Build, PartCategory, PartType, Part } from "../db/model.js";
 
 export const buildFuncs = {
   getBuildsData: async (req, res) => {
+    // Get userId from session
     const userId = req.session.userId;
 
-    const builds = await Build.findAll({
+    // Get all builds for the user
+    const userBuilds = await Build.findAll({
       where: {
         userId: userId,
       }
     });
+    
+    if (!userBuilds) {
+      return res.send({
+        message: 'Failed to get builds data',
+        success: false
+      });
+    };
 
-    const partsData = await Promise.all(builds.map((build) => {
+    // Get parts data associated with each build of 'userBuilds'
+    const partsData = await Promise.all(userBuilds.map((build) => {
       return PartCategory.findAll({
         include: {
           model: PartType,
@@ -25,19 +35,66 @@ export const buildFuncs = {
       })
     }))
 
-    if (!builds) {
+    if (!partsData) {
       return res.send({
-        message: 'Failed to get builds data',
+        message: 'Failed to get parts data for builds',
         success: false
       });
-    } else {
-      return res.send({
-        message: 'Got builds data successfully',
-        success: true,
-        builds: builds,
-        parts: partsData[0]
-      });
     };
+
+    // TODO: restructure data to be and array of build objects made up of part category objects made up of part objects
+    // {
+    //   'downhill': {
+    //     'frame': [ 'frame', 'bottomBracket' ],
+    //     'groupset': [ 'chain', 'crank' ]
+    //   }
+    // }
+    const buildsData = [];
+
+    // Builds loop
+    for (let i = 0; i < partsData.length; i++) {
+      const buildName = userBuilds[i].name;
+      const buildId = userBuilds[i].id;
+
+      buildsData.push({ buildName, buildId });
+
+      // Category loop
+      for (let j = 0; j < partsData[i].length; j++) {
+        const categoryName = partsData[i][j].name;
+        const categoryId = partsData[i][j].id;
+        // console.log;
+        // console.log(`category data:`, partsData[i][j].part_types)
+        // console.log;
+        
+        if (!buildsData[i].categories) {
+          buildsData[i].categories = [];
+        };
+        
+        buildsData[i].categories.push({ categoryName, categoryId });
+        
+        // Parts loop
+        for (let k = 0; k < partsData[i][j].part_types.length; k++) {
+          const partName = partsData[i][j].part_types[k].parts[0].name;
+          const partId = partsData[i][j].part_types[k].parts[0].id;
+
+          // console.log();
+          // console.log(`part name:`, partsData[i][j].part_types[k].parts[0].name);
+          // console.log();
+          
+          if (!buildsData[i].categories[j].parts) {
+            buildsData[i].categories[j].parts = [];
+          }
+
+          buildsData[i].categories[j].parts.push({ partName, partId })
+        };
+      };
+    };
+
+    return res.send({
+      message: 'Got builds data successfully',
+      success: true,
+      buildsData: buildsData,
+    });
   },
 
   newBuild: async (req, res) => {
@@ -97,6 +154,7 @@ export const buildFuncs = {
       include: Build
     });
 
+    // TODO: Do I need to return associated parts data too?
     if (newBuild) {
       return res.send({
         message: 'New build added successfully',
@@ -105,5 +163,4 @@ export const buildFuncs = {
       });
     };
   }
-
 }
