@@ -30,7 +30,8 @@ const router = createBrowserRouter(
         loader={
           async () => {
             const res = await axios.get('/api/builds');
-            return { builds: res.data.builds }
+            // console.log(`main.jsx res.data:`, res.data)
+            return { buildsData: res.data.buildsData }
           }
         }
       />
