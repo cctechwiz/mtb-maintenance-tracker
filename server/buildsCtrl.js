@@ -2,7 +2,6 @@ import { User, Build, PartCategory, PartType, Part } from "../db/model.js";
 
 export const buildFuncs = {
   getBuildsData: async (req, res) => {
-    // QUESTION: should this be userId from Redux or the session?
     const userId = req.session.userId;
 
     const builds = await Build.findAll({
@@ -26,8 +25,6 @@ export const buildFuncs = {
       })
     }))
 
-    console.log(`partsData:`, partsData[0])
-
     if (!builds) {
       return res.send({
         message: 'Failed to get builds data',
@@ -44,10 +41,7 @@ export const buildFuncs = {
   },
 
   newBuild: async (req, res) => {
-    const { buildName, userId } = req.body;
-
-    // console.log()
-    // console.log(`buildName/userId:`, buildName, userId)
+    const { buildName, userId, createNewParts } = req.body;
 
     // Get users build names
     let user = await User.findByPk(userId, {
@@ -72,6 +66,32 @@ export const buildFuncs = {
       userId: userId
     });
 
+    // Creates a new generic part for each part type if box was checked at submission
+    if (createNewParts) {
+      const partTypes = await PartType.findAll();
+
+      // Formats name string 'partType.name' from snake_case to Title Case
+      for (const partObj of partTypes) {
+        partObj.name = partObj.name.split('_').map((word) => {
+          return word[0].toUpperCase() + word.substring(1);
+        }).join(' ');
+      };
+
+      // Create a new part for each object in 'partTypes
+      const newBuildParts = await Promise.all(partTypes.map( async (partType) => {
+        return Part.create({
+          name: partType.name,
+          typeId: partType.id,
+          userId: req.session.userId,
+        });
+      }));
+
+      // Adds new parts to new build through installations table
+      for (const part of newBuildParts) {
+        newBuild.addPart(part)
+      };
+    };
+
     // Get all of user's builds
     user = await User.findByPk(userId, {
       include: Build
@@ -82,8 +102,8 @@ export const buildFuncs = {
         message: 'New build added successfully',
         success: true,
         builds: user.builds
-      })
-    }
+      });
+    };
   }
 
 }
