@@ -31,7 +31,7 @@ const Builds = () => {
       <div>
         <h1>Builds</h1>
         {!displayForm && <button onClick={() => setDisplayForm(true)}>Add New Build</button>}
-        {displayForm && <NewBuildForm setBuildsData={setBuildsData} setDisplayForm={setDisplayForm} />}
+        {displayForm && <NewBuildForm setBuilds={setBuilds} setDisplayForm={setDisplayForm} />}
       </div>
         
       <div>
