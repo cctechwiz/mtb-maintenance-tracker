@@ -1,7 +1,7 @@
 import React from 'react';
 import PartItem from './PartItem.jsx';
 
-export const CategoryItem = ({ name, partsData }) => {
+const CategoryItem = ({ name, partsData }) => {
   const parts = partsData.map((part) => {
     return (
       <PartItem
@@ -19,4 +19,6 @@ export const CategoryItem = ({ name, partsData }) => {
       </ul>
     </div>
   );
-}
+};
+
+export default CategoryItem;
