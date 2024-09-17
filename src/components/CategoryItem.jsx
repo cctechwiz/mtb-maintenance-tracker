@@ -1,12 +1,22 @@
-import React from 'react'
-import PartItem from './PartItem'
+import React from 'react';
+import PartItem from './PartItem.jsx';
 
-export const CategoryItem = () => {
+export const CategoryItem = ({ name, partsData }) => {
+  const parts = partsData.map((part) => {
+    return (
+      <PartItem
+        key={part.partId}
+        name={part.partName}
+      />
+    );
+  });
+
   return (
     <div>
-      <h3>Brakes</h3>
-      <PartItem />
-      <PartItem />
+      <h3>{ name }</h3>
+      <ul>
+        { parts }
+      </ul>
     </div>
-  )
+  );
 }
