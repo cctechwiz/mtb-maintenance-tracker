@@ -1,5 +1,5 @@
 import React from 'react';
-import { CategoryItem } from './CategoryItem.jsx';
+import CategoryItem from './CategoryItem.jsx';
 
 const BuildItem = ({ name, categoriesData }) => {
   const categories = categoriesData.map((category) => {
