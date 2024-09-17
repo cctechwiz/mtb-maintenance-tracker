@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const PartItem = () => {
+const PartItem = ({ name }) => {
   return (
-    <div>Brake Caliper</div>
-  )
-}
+    <li>{ name }</li>
+  );
+};
 
-export default PartItem
+export default PartItem;
