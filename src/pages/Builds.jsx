@@ -6,21 +6,23 @@ import { useLoaderData } from 'react-router-dom';
 
 const Builds = () => {
   const [ displayForm, setDisplayForm ] = useState(false);
-  const [ buildsData, setBuildsData ] = useState([])
+  const [ builds, setBuilds ] = useState([])
 
-  const { builds } = useLoaderData();
+  const { buildsData } = useLoaderData();
 
   // QUESTION: Is a useEffect necessary, and why does the useEffect work here?
   useEffect(() => {
-    setBuildsData(builds);
+    setBuilds(buildsData);
   }, []);
   
-  // console.log(`buildsData:`, buildsData)
-  
-  // QUESTION: 
-  const buildItems = buildsData.map((build) => {
+  // Create BuildItem components
+  const buildItems = builds.map((build) => {
     return (
-      <BuildItem key={build.id} name={build.name} />
+      <BuildItem 
+        key={build.buildId}
+        name={build.buildName}
+        categoriesData={build.categories}
+      />
     )
   })
 
