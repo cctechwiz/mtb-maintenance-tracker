@@ -42,13 +42,7 @@ export const buildFuncs = {
       });
     };
 
-    // TODO: restructure data to be and array of build objects made up of part category objects made up of part objects
-    // {
-    //   'downhill': {
-    //     'frame': [ 'frame', 'bottomBracket' ],
-    //     'groupset': [ 'chain', 'crank' ]
-    //   }
-    // }
+    // Restructures data
     const buildsData = [];
 
     // Builds loop
@@ -60,11 +54,9 @@ export const buildFuncs = {
 
       // Category loop
       for (let j = 0; j < partsData[i].length; j++) {
-        const categoryName = partsData[i][j].name;
+        let categoryName = partsData[i][j].name;
+        categoryName = categoryName[0].toUpperCase() + categoryName.substring(1);
         const categoryId = partsData[i][j].id;
-        // console.log;
-        // console.log(`category data:`, partsData[i][j].part_types)
-        // console.log;
         
         if (!buildsData[i].categories) {
           buildsData[i].categories = [];
@@ -76,16 +68,12 @@ export const buildFuncs = {
         for (let k = 0; k < partsData[i][j].part_types.length; k++) {
           const partName = partsData[i][j].part_types[k].parts[0].name;
           const partId = partsData[i][j].part_types[k].parts[0].id;
-
-          // console.log();
-          // console.log(`part name:`, partsData[i][j].part_types[k].parts[0].name);
-          // console.log();
           
           if (!buildsData[i].categories[j].parts) {
             buildsData[i].categories[j].parts = [];
-          }
+          };
 
-          buildsData[i].categories[j].parts.push({ partName, partId })
+          buildsData[i].categories[j].parts.push({ partName, partId });
         };
       };
     };
