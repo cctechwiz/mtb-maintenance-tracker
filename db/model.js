@@ -366,28 +366,28 @@ StyleMultiplier.init(
 );
 
 // Builds foreign key to Users
-User.hasMany(Build, { foreignKey: 'userId' });
-Build.belongsTo(User, { foreignKey: 'userId' })
+User.hasMany(Build, { foreignKey: 'userId', allowNull: false });
+Build.belongsTo(User, { foreignKey: 'userId', allowNull: false })
 
 // Parts foreign key to Users
-User.hasMany(Part, { foreignKey: 'userId' });
-Part.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Part, { foreignKey: 'userId', allowNull: false });
+Part.belongsTo(User, { foreignKey: 'userId', allowNull: false });
 
 // PartsType foreign key to PartCategory
-PartCategory.hasMany(PartType, { foreignKey: 'categoryId'});
-PartType.belongsTo(PartCategory, { foreignKey: 'categoryId'})
+PartCategory.hasMany(PartType, { foreignKey: 'categoryId', allowNull: false });
+PartType.belongsTo(PartCategory, { foreignKey: 'categoryId', allowNull: false })
 
 // Parts foreign key to PartType
-PartType.hasMany(Part, { foreignKey: 'typeId' });
-Part.belongsTo(PartType, { foreignKey: 'typeId' });
+PartType.hasMany(Part, { foreignKey: 'typeId', allowNull: false });
+Part.belongsTo(PartType, { foreignKey: 'typeId', allowNull: false });
 
 // Services foreign key to Parts
-Part.hasMany(Service, { foreignKey: 'partId' });
-Service.belongsTo(Part, { foreignKey: 'partId' });
+Part.hasMany(Service, { foreignKey: 'partId', allowNull: false });
+Service.belongsTo(Part, { foreignKey: 'partId', allowNull: false });
 
 // Rides foreign key to Users
-User.hasMany(Ride, { foreignKey: 'userId' });
-Ride.belongsTo(User, { foreignKey: 'userId' });
+User.hasMany(Ride, { foreignKey: 'userId', allowNull: false });
+Ride.belongsTo(User, { foreignKey: 'userId', allowNull: false });
 
 // OPTIONAL: Rides foreign key to RideConditions
 RideCondition.hasMany(Ride, { foreignKey: 'conditionId' });
