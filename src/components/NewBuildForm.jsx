@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-const NewBuildForm = ({ setBuildsData }) => {
+const NewBuildForm = ({ setBuildsData, setDisplayForm }) => {
   const [ name, setName ] = useState('');
   const [ newPartsSelected, setNewPartsSelected ] = useState(true);
 
@@ -20,7 +20,9 @@ const NewBuildForm = ({ setBuildsData }) => {
     const res = await axios.post('/api/new-build', bodyObj);
 
     if (res.data.success) {
-      setBuildsData(res.data.builds)
+      setBuildsData(res.data.builds);
+      setName('');
+      setDisplayForm(false);
     }
   };
 
