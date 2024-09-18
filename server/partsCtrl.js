@@ -1,4 +1,4 @@
-import { Part, PartCategory, PartType, User } from "../db/model.js";
+import { Build, Part, PartCategory, PartType, User } from "../db/model.js";
 
 export const partFuncs = {
   getPartsData: async (req, res) => {
@@ -15,7 +15,8 @@ export const partFuncs = {
       include: {
         model: PartType,
         include: {
-          model: Part
+          model: Part,
+          include: Build
         }
       }
     });

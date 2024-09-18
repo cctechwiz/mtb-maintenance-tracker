@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PartItem = ({ name }) => {
+const PartItem = ({ name, build }) => {
   return (
-    <li>{ name }</li>
+    <li>Part name: { name } | installed on: {build[0].name}</li>
   )
 }
 
