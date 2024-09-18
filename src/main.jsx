@@ -1,13 +1,14 @@
-import { StrictMode } from "react";
+import { StrictMode, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
 import axios from "axios";
-import { Provider } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 
 import App from "./App.jsx";
 import "./index.css";
@@ -20,49 +21,71 @@ import Auth from "./pages/Auth.jsx";
 import Settings from "./pages/Settings.jsx";
 import store from "./redux/store.js";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route index element={<Dashboard />} />
-      <Route
-        path="/builds"
-        element={<Builds />}
-        loader={
-          async () => {
-            const res = await axios.get('/api/builds');
-            // console.log(`main.jsx res.data:`, res.data)
-            return { buildsData: res.data.success ? res.data.buildsData : res.data.success  }
+const Router = () => {
+  const userId = useSelector((state) => state.userId);
+  const dispatch = useDispatch();
+
+  const sessionCheck = async () => {
+    const res = await axios.get('/api/session-check');
+
+    if (res.data.success) {
+      dispatch({
+        type: 'USER_AUTH',
+        payload: res.data.userId
+      });
+    };
+  };
+
+  useEffect(() => {
+    sessionCheck();
+  }, [userId]);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<App />}>
+        <Route index element={ userId ? <Dashboard /> : <Navigate to='/auth' /> } />
+        <Route
+          path="/builds"
+          element={ userId ? <Builds /> : <Navigate to='/auth' /> }
+          loader={
+            async () => {
+              const res = await axios.get('/api/builds');
+              // console.log(`main.jsx res.data:`, res.data)
+              return { buildsData: res.data.success ? res.data.buildsData : res.data.success  }
+            }
           }
-        }
-      />
-      <Route
-        path="/parts"
-        element={<Parts />}
-      />
-      <Route
-        path="/rides"
-        element={<Rides />}
-      />
-      <Route
-        path="/maintenance"
-        element={<Maintenance />}
-      />
-      <Route
-        path="/settings"
-        element={<Settings />}
-      />
-      <Route
-        path="/auth"
-        element={<Auth />}
-      />
-    </Route>
-  )
-);
+        />
+        <Route
+          path="/parts"
+          element={ userId ? <Parts /> : <Navigate to='/auth' /> }
+        />
+        <Route
+          path="/rides"
+          element={ userId ? <Rides /> : <Navigate to='/auth' /> }
+        />
+        <Route
+          path="/maintenance"
+          element={ userId ? <Maintenance /> : <Navigate to='/auth' /> }
+        />
+        <Route
+          path="/settings"
+          element={ userId ? <Settings /> : <Navigate to='/auth' /> }
+        />
+        <Route
+          path="/auth"
+          element={<Auth />}
+        />
+      </Route>
+    )
+  );
+
+  return <RouterProvider router={router} />
+};
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Router />
     </Provider>
   </StrictMode>
 );
