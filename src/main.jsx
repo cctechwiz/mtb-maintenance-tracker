@@ -58,6 +58,12 @@ const Router = () => {
         <Route
           path="/parts"
           element={ userId ? <Parts /> : <Navigate to='/auth' /> }
+          loader={
+            async () => {
+              const res = await axios.get('/api/parts');
+              return { partsData: res.data.success ? res.data.partsData : res.data.success }
+            }
+          }
         />
         <Route
           path="/rides"
