@@ -153,8 +153,7 @@ export const buildFuncs = {
     if (newBuild) {
       return res.send({
         message: 'New build added successfully',
-        success: true,
-        builds: user.builds
+        success: true
       });
     };
   }
