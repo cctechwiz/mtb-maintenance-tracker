@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import BuildItem from '../components/buildsPage/BuildItem.jsx'
-import NewBuildForm from '../components/NewBuildForm.jsx';
+import NewBuildForm from '../components/buildsPage/NewBuildForm.jsx';
 import { useSelector } from 'react-redux';
 import { useLoaderData } from 'react-router-dom';
 
