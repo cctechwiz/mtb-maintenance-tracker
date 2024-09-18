@@ -20,7 +20,7 @@ const NewBuildForm = ({ setBuilds, setDisplayForm }) => {
     const res = await axios.post('/api/new-build', bodyObj);
 
     if (res.data.success) {
-      setBuildsData(res.data.builds);
+      setBuilds(res.data.builds);
       setName('');
       setDisplayForm(false);
     }

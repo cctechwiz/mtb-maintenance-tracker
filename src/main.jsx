@@ -31,7 +31,7 @@ const router = createBrowserRouter(
           async () => {
             const res = await axios.get('/api/builds');
             // console.log(`main.jsx res.data:`, res.data)
-            return { buildsData: res.data.buildsData }
+            return { buildsData: res.data.success ? res.data.buildsData : res.data.success  }
           }
         }
       />

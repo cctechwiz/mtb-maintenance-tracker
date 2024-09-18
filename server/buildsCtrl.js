@@ -5,6 +5,13 @@ export const buildFuncs = {
     // Get userId from session
     const userId = req.session.userId;
 
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
     // Get all builds for the user
     const userBuilds = await Build.findAll({
       where: {
@@ -15,7 +22,7 @@ export const buildFuncs = {
     if (!userBuilds) {
       return res.send({
         message: 'Failed to get builds data',
-        success: false
+        success: false,
       });
     };
 

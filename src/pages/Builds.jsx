@@ -12,7 +12,9 @@ const Builds = () => {
 
   // QUESTION: Is a useEffect necessary, and why does the useEffect work here?
   useEffect(() => {
-    setBuilds(buildsData);
+    if (buildsData) {
+      setBuilds(buildsData);
+    }
   }, []);
   
   // Create BuildItem components
