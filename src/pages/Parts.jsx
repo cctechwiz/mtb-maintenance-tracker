@@ -14,9 +14,6 @@ const Parts = () => {
     };
   });
 
-  console.log();
-  console.log(partsData);
-  console.log();
   const partItems = partsData.map((part) => {
     const name = part.name[0].toUpperCase() + part.name.substring(1)
     return (
