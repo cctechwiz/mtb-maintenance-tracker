@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import CategoryItem from '../components/partsPage/CategoryItem';
+import NewPartForm from '../components/partsPage/NewPartForm';
 
 const Parts = () => {
   const [ displayForm, setDisplayForm ] = useState(false);
@@ -27,8 +28,15 @@ const Parts = () => {
 
   return (
     <>
-      <h1>Parts</h1>
-      { partItems }
+      <div>
+        <h1>Parts</h1>
+        {!displayForm && <button onClick={() => setDisplayForm(true)}>Add New Part</button>}
+        {displayForm && <NewPartForm setParts={setParts} setDisplayForm={setDisplayForm} />}
+      </div>
+
+      <div>
+        { partItems }
+      </div>
     </>
   );
 }
