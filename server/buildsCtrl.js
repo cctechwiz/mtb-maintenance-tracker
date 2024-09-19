@@ -156,5 +156,40 @@ export const buildFuncs = {
         success: true
       });
     };
+  },
+
+  getUserBuilds: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return req.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const userBuilds = await Build.findAll({
+      where: {
+        userId: userId
+      },
+      attributes: ['id', 'name']
+    });
+
+    // console.log();
+    // console.log(`userBuilds:`, userBuilds);
+    // console.log();
+
+    if (!userBuilds) {
+      return res.send({
+        message: 'Failed to get user builds',
+        success: false
+      });
+    };
+
+    return res.send({
+      message: 'Got user builds successfully',
+      success: true,
+      builds: userBuilds
+    });
   }
-}
+};

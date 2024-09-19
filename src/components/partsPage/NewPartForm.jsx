@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BuildsSelect from './BuildsSelect.jsx';
 
 const NewPartForm = () => {
   const [ name, setName ] = useState('');
@@ -36,9 +37,9 @@ const NewPartForm = () => {
         {/* Which build is it installed on? */}
 
         {/* Part type drop down (should there be a part category drop down first???) */}
-        {/* <div>
-          <option value=""></option>
-        </div> */}
+        <div>
+          <BuildsSelect />
+        </div>
 
         {/* Brand */}
         <div>
