@@ -5,17 +5,9 @@ import NewPartForm from '../components/partsPage/NewPartForm';
 
 const Parts = () => {
   const [ displayForm, setDisplayForm ] = useState(false);
-  const [ parts, setParts ] = useState([]);
+  const [ parts, setParts ] = useState(useLoaderData().partsData);
 
-  const { partsData } = useLoaderData();
-
-  useEffect(() => {
-    if (partsData) {
-      setParts(partsData);
-    };
-  });
-
-  const partItems = partsData.map((part) => {
+  const partItems = parts.map((part) => {
     const name = part.name[0].toUpperCase() + part.name.substring(1)
     return (
       <CategoryItem
