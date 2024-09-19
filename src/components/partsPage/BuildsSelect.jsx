@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-const BuildsSelect = () => {
+const BuildsSelect = ({ setBuildId }) => {
   const [ builds, setBuilds ] = useState([]);
 
   const getUserBuilds = async () => {
@@ -25,7 +25,12 @@ const BuildsSelect = () => {
   return (
     <>
       <label htmlFor="builds-select">Which build is it installed on?</label>
-      <select name="builds" id="builds-select" defaultValue='choose'>
+      <select
+        name="builds"
+        id="builds-select"
+        defaultValue='choose'
+        onChange={(e) => setBuildId(e.target.value)}
+      >
         <option value="choose" disabled>Choose a build</option>
         {selectOptions}
         <option value="-" disabled>-</option>

@@ -3,8 +3,8 @@ import BuildsSelect from './BuildsSelect.jsx';
 
 const NewPartForm = () => {
   const [ name, setName ] = useState('');
-  const [ build, setBuild ] = useState('');
-  const [ partType, setPartType ] = useState('');
+  const [ buildId, setBuildId ] = useState('');
+  const [ partTypeId, setPartTypeId ] = useState('');
   const [ brand, setBrand ] = useState('');
   const [ partNum, setPartNum ] = useState('');
   const [ serialNum, setSerialNum ] = useState('');
@@ -16,6 +16,7 @@ const NewPartForm = () => {
 
   // console.log(`name:`, name);
   // console.log(`brand:`, brand);
+  // console.log(`buildId:`, buildId)
 
   // TODO: prevent user from adding a part to build if build already has part in selected partType (add functionality to swap the part???)
 
@@ -34,12 +35,12 @@ const NewPartForm = () => {
           />
         </div>
 
-        {/* Which build is it installed on? */}
+      {/* Build */}
+        <div>
+          <BuildsSelect setBuildId={setBuildId} />
+        </div>
 
         {/* Part type drop down (should there be a part category drop down first???) */}
-        <div>
-          <BuildsSelect />
-        </div>
 
         {/* Brand */}
         <div>
