@@ -42,9 +42,12 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
       notes
     };
 
-    // TODO: prevent submission when required fields are empty
-    // if (name === '' || )
+    if (name === '' || buildId === '' || typeId === '') {
+      alert('Please fill out required fields');
+      return;
+    }
 
+    // TODO: prevent user from submitting non-number in estHours, estMiles, hoursInt, milesInt, modelYear
     // if (bodyObj.name === '') {
     //   alert('Please provide a part name.')
     //   return;
@@ -84,7 +87,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
       <h3>Create New Part</h3>
       <form onSubmit={handleNewPart}>
         <div>
-          <label htmlFor="name">Part Name:</label>
+          <label htmlFor="name">Part Name (required):</label>
           <input
             id='name'
             value={name}
@@ -106,7 +109,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
 
         {/* Brand */}
         <div>
-          <label htmlFor="brand">Brand Name:</label>
+          <label htmlFor="brand">Brand Name (optional):</label>
           <input
             id='brand'
             value={brand}
@@ -118,7 +121,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
 
         {/* Manufacturer Part number */}
         <div>
-          <label htmlFor="part-num">Manufacturer Part Number:</label>
+          <label htmlFor="part-num">Manufacturer Part Number (optional):</label>
           <input
             id='part-num'
             value={partNum}
@@ -130,7 +133,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
 
         {/* Serial Number */}
         <div>
-          <label htmlFor="serial-num">Serial Number:</label>
+          <label htmlFor="serial-num">Serial Number (optional):</label>
           <input
             id='serial-num'
             value={serialNum}
@@ -142,7 +145,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
 
         {/* Model Year */}
         <div>
-          <label htmlFor="model-year">Model Year:</label>
+          <label htmlFor="model-year">Model Year (optional):</label>
           <input
             id='model-year'
             value={modelYear}
@@ -155,7 +158,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
         {/* Time/Distance on already on part */}
         <div>
           <div>
-            <span>Have you used this part already?</span>
+            <span>Have you used this part already (optional)?</span>
           </div>
           <div>
             <label htmlFor="est-hours">Estimated Time Since Last Service (in hours)</label>
@@ -183,7 +186,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
         {/* Manufacturer's recommended service interval */}
         <div>
           <div>
-            <span>Do you know the recommended manufacturer's recommended service interval?</span>
+            <span>Do you know the recommended manufacturer's recommended service interval (optional)?</span>
           </div>
           <div>
             <label htmlFor="time-interval">Service interval in hours</label>
@@ -209,7 +212,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
 
         {/* Notes */}
         <div>
-          <label htmlFor="notes">Notes regarding this part</label>
+          <label htmlFor="notes">Part Notes/Details (optional)</label>
           <textarea
             id='notes'
             value={notes}

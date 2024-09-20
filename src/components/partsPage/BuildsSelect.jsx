@@ -24,7 +24,7 @@ const BuildsSelect = ({ setBuildId }) => {
 
   return (
     <>
-      <label htmlFor="builds-select">Which build is it installed on?</label>
+      <label htmlFor="builds-select">Installed on (required):</label>
       <select
         name="builds"
         id="builds-select"

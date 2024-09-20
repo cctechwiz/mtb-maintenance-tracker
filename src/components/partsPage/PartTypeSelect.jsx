@@ -61,7 +61,7 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
       </div>
 
       <div>
-        <label htmlFor="category">Part Category:</label>
+        <label htmlFor="category">Part Category (required):</label>
         <select
           id='category'
           name="part-category"
@@ -73,7 +73,7 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
         </select>
 
         {/* QUESTION: How do I get part type to go back to 'default' when a new part category is chosen??? */}
-        <label htmlFor="type">Part Type:</label>
+        <label htmlFor="type">Part Type (required):</label>
         <select
           id='type'
           name="part-type"
