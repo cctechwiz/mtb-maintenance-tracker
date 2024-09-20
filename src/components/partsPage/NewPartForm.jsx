@@ -5,7 +5,7 @@ import PartTypeSelect from './PartTypeSelect.jsx';
 const NewPartForm = () => {
   const [ name, setName ] = useState('');
   const [ buildId, setBuildId ] = useState('');
-  const [ partTypeId, setPartTypeId ] = useState('');
+  const [ typeId, setTypeId ] = useState('');
   const [ brand, setBrand ] = useState('');
   const [ partNum, setPartNum ] = useState('');
   const [ serialNum, setSerialNum ] = useState('');
@@ -18,6 +18,7 @@ const NewPartForm = () => {
   // console.log(`name:`, name);
   // console.log(`brand:`, brand);
   // console.log(`buildId:`, buildId)
+  console.log('typeId:', typeId)
 
   // TODO: prevent user from adding a part to build if build already has part in selected partType (add functionality to swap the part???)
 
@@ -31,7 +32,7 @@ const NewPartForm = () => {
             id='name'
             value={name}
             type="text"
-            placeholder='e.g. Cassette'
+            placeholder='e.g. Cassette - X01 Eagle 12 speed'
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -43,7 +44,7 @@ const NewPartForm = () => {
 
         {/* Part type drop down (should there be a part category drop down first???) */}
         <div>
-          <PartTypeSelect setPartTypeId={setPartTypeId} />
+          <PartTypeSelect setTypeId={setTypeId} typeId={typeId} />
         </div>
 
         {/* Brand */}
