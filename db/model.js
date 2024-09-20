@@ -374,8 +374,10 @@ User.hasMany(Part, { foreignKey: 'userId', allowNull: false });
 Part.belongsTo(User, { foreignKey: 'userId', allowNull: false });
 
 // PartsType foreign key to PartCategory
-PartCategory.hasMany(PartType, { foreignKey: 'categoryId', allowNull: false });
-PartType.belongsTo(PartCategory, { foreignKey: 'categoryId', allowNull: false })
+PartCategory.hasMany(PartType, { foreignKey: { name: 'categoryId', type: DataTypes.INTEGER, allowNull: false } });
+PartType.belongsTo(PartCategory, { foreignKey: { name: 'categoryId', type: DataTypes.INTEGER, allowNull: false } })
+// PartCategory.hasMany(PartType, { foreignKey: 'categoryId', allowNull: false });
+// PartType.belongsTo(PartCategory, { foreignKey: 'categoryId', allowNull: false })
 
 // Parts foreign key to PartType
 PartType.hasMany(Part, { foreignKey: 'typeId', allowNull: false });
