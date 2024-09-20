@@ -63,6 +63,7 @@ Groupset:   (should I add functionality for e-mtb bikes)
   - crank
   - chainring
   - chain
+  - cassette
 
 Wheels:
   - front wheel
@@ -99,7 +100,7 @@ const partsSeed = {
   suspension: ['shock', 'linkage_bearings'],
   cockpit: ['stem', 'handlebars', 'grips', 'saddle', 'seatpost', 'dropper_lever', 'pedals'],
   brakes: ['front_lever', 'rear_lever', 'front_brake_line', 'rear_brake_line', 'front_caliper', 'rear_caliper', 'front_rotor', 'rear_rotor'],
-  groupset: ['shifter', 'housing_and_cable', 'derailleur', 'crank', 'chainring', 'chain'],
+  groupset: ['shifter', 'housing_and_cable', 'derailleur', 'crank', 'chainring', 'chain', 'cassette'],
   wheels: ['front_rim', 'rear_rim', 'front_hub', 'rear_hub', 'front_spokes', 'rear_spokes', 'front_tire', 'rear_tire', 'front_valve_stem', 'rear_valve_stem', 'front_sealant', 'rear_sealant', 'front_valve_core', 'rear_valve_core', 'front_axle', 'rear_axle']
 };
 
