@@ -37,5 +37,24 @@ export const partFuncs = {
 
   newPart: async (req, res) => {
 
+  },
+
+  getPartTypes: async (req, res) => {
+    const partTypes = await PartCategory.findAll({
+      include: PartType
+    });
+
+    if (!partTypes) {
+      return res.send({
+        message: 'Failed to get part types',
+        success: false
+      });
+    };
+
+    return res.send({
+      message: 'Got part types successfully',
+      success: true,
+      partTypes: partTypes
+    });
   }
-}
+};

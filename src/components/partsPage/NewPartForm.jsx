@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import BuildsSelect from './BuildsSelect.jsx';
+import PartTypeSelect from './PartTypeSelect.jsx';
 
 const NewPartForm = () => {
   const [ name, setName ] = useState('');
@@ -35,12 +36,15 @@ const NewPartForm = () => {
           />
         </div>
 
-      {/* Build */}
+        {/* Build */}
         <div>
           <BuildsSelect setBuildId={setBuildId} />
         </div>
 
         {/* Part type drop down (should there be a part category drop down first???) */}
+        <div>
+          <PartTypeSelect setPartTypeId={setPartTypeId} />
+        </div>
 
         {/* Brand */}
         <div>
