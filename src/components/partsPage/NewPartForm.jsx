@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import BuildsSelect from './BuildsSelect.jsx';
 import PartTypeSelect from './PartTypeSelect.jsx';
+import axios from 'axios';
 
-const NewPartForm = () => {
+const NewPartForm = ({ setParts, setDisplayForm }) => {
   const [ name, setName ] = useState('');
   const [ buildId, setBuildId ] = useState('');
   const [ typeId, setTypeId ] = useState('');
@@ -13,21 +14,77 @@ const NewPartForm = () => {
   const [ estMiles, setEstMiles ] = useState('');
   const [ hoursInt, setHoursInt ] = useState('');
   const [ milesInt, setMilesInt ] = useState('');
+  const [ modelYear, setModelYear ] = useState('');
   const [ notes, setNotes ] = useState('');
 
   // console.log(`name:`, name);
   // console.log(`brand:`, brand);
   // console.log(`buildId:`, buildId)
-  console.log('typeId:', typeId)
+  // console.log('typeId:', typeId)
 
   // TODO: prevent user from adding a part to build if build already has part in selected partType (add functionality to swap the part???)
+
+  const handleNewPart = async (e) => {
+    e.preventDefault();
+
+    const bodyObj = {
+      name,
+      buildId,
+      typeId,
+      brand,
+      partNum,
+      serialNum,
+      estHours,
+      estMiles,
+      hoursInt,
+      milesInt,
+      modelYear,
+      notes
+    };
+
+    // TODO: prevent submission when required fields are empty
+    // if (name === '' || )
+
+    // if (bodyObj.name === '') {
+    //   alert('Please provide a part name.')
+    //   return;
+    // };
+
+    const res = await axios.post('/api/new-part', bodyObj);
+
+    console.log('new-part axios response:', res.data)
+    if (res.data.success) {
+      setName('');
+      setBuildId('');
+      setTypeId('');
+      setBrand('');
+      setPartNum('');
+      setSerialNum('');
+      setEstHours('');
+      setEstMiles('');
+      setHoursInt('');
+      setMilesInt('');
+      setModelYear('');
+      setNotes('');
+      
+      setDisplayForm(false);
+      
+      const res = await axios.get('/api/parts');
+      
+      console.log('parts axios response:', res.data)
+      if (res.data.success) {
+        setParts(res.data.partsData)
+      };
+    };
+
+  };
 
   return (
     <>
       <h3>Create New Part</h3>
-      <form>
+      <form onSubmit={handleNewPart}>
         <div>
-          <label htmlFor="name">Part Name</label>
+          <label htmlFor="name">Part Name:</label>
           <input
             id='name'
             value={name}
@@ -42,14 +99,14 @@ const NewPartForm = () => {
           <BuildsSelect setBuildId={setBuildId} />
         </div>
 
-        {/* Part type drop down (should there be a part category drop down first???) */}
+        {/* Part type */}
         <div>
           <PartTypeSelect setTypeId={setTypeId} typeId={typeId} />
         </div>
 
         {/* Brand */}
         <div>
-          <label htmlFor="brand">Brand Name</label>
+          <label htmlFor="brand">Brand Name:</label>
           <input
             id='brand'
             value={brand}
@@ -61,25 +118,37 @@ const NewPartForm = () => {
 
         {/* Manufacturer Part number */}
         <div>
-          <label htmlFor="part-num">Manufacturer Part Number</label>
+          <label htmlFor="part-num">Manufacturer Part Number:</label>
           <input
             id='part-num'
             value={partNum}
             type="text"
-            placeholder='Mfr Part Number'
+            placeholder='e.g. XG-1295'
             onChange={(e) => setPartNum(e.target.value)}
           />
         </div> 
 
         {/* Serial Number */}
         <div>
-          <label htmlFor="serial-num">Serial Number</label>
+          <label htmlFor="serial-num">Serial Number:</label>
           <input
             id='serial-num'
             value={serialNum}
             type="text"
             placeholder='Serial Number'
             onChange={(e) => setSerialNum(e.target.value)}
+          />
+        </div>
+
+        {/* Model Year */}
+        <div>
+          <label htmlFor="model-year">Model Year:</label>
+          <input
+            id='model-year'
+            value={modelYear}
+            type="text"
+            placeholder='e.g. 2023'
+            onChange={(e) => setModelYear(e.target.value)}
           />
         </div>
 

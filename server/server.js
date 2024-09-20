@@ -65,6 +65,7 @@ import { partFuncs } from './partsCtrl.js';
 const { getPartsData, newPart, getPartTypes } = partFuncs;
 
 app.get('/api/parts', getPartsData )
+app.post('/api/new-part', newPart )
 app.get('/api/part-types', getPartTypes )
 
 ViteExpress.listen(app, port, () => {
