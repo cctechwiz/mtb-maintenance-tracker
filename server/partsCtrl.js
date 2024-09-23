@@ -114,9 +114,10 @@ export const partFuncs = {
       });
     };
 
-    const { partId, name } = req.body;
+    const { partId, name, buildId, milesInt } = req.body;
 
     const part = await Part.findByPk(partId);
+    console.log('PART PRE EDIT', part)
 
     if (!part) {
       return res.send({
@@ -125,19 +126,26 @@ export const partFuncs = {
       });
     };
 
-    await part.update({
-      name
+    const updatedPart = await part.update({
+      name,
+      milesInt: milesInt === '' ? null : milesInt
     });
 
-    // Is there a better way to confirm that the updated processed successfully? Do I need to check for all part properties being edited?
-    const updatedPart = await Part.findByPk(partId);
+    // TODO: figure out how to update installation if build changes
 
-    if (updatedPart.name !== name) {
-      return res.send({
-        message: 'Update failed',
-        success: false
-      });
-    };
+    console.log('PART POST EDIT:', updatedPart)
+
+    // How do I confirm that the updated processed successfully? 
+    // Do I need to check for all part properties being edited?
+    // Should I even be checking if it was successful?
+  
+    // Even though the part is updated, and some fields are different, this if statement is evaluating as true.
+    // if (part === updatedPart) {
+    //   return res.send({
+    //     message: 'Update failed or no fields were changed',
+    //     success: false
+    //   });
+    // };
 
     return res.send({
       message: 'Part updated successfully',
