@@ -1,15 +1,32 @@
 import React, { useState } from 'react'
 import EditBuildSelect from './EditBuildSelect.jsx';
+import axios from 'axios';
 
-const EditPartForm = ({ partData }) => {
+const EditPartForm = ({ partData, toViewMode }) => {
   const [ name, setName ] = useState(partData.name);
   const [ buildId, setBuildId ] = useState(partData.builds[0]?.id || false);
 
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    
+    const bodyObj = {
+      partId: partData.id,
+      name,
 
-  console.log('buildId state:', buildId)
+    };
+
+    const res = await axios.put('/api/edit-part', bodyObj);
+
+    if (res.data.success) {
+      setName('');
+      toViewMode();
+
+      
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={(e) => handleEdit(e)}>
       <div>
         <label htmlFor="name">Name:</label>
         <input 
@@ -32,6 +49,10 @@ const EditPartForm = ({ partData }) => {
           placeholder='Part name'
           onChange={(e) => setName(e.target.value)}
         /> */}
+      </div>
+
+      <div>
+        <input type="submit" />
       </div>
 
     </form>

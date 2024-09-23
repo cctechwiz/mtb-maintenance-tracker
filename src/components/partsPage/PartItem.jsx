@@ -4,7 +4,7 @@ import EditPartForm from './EditPartForm';
 const PartItem = ({ name, build, partData, categoryId }) => {
   const [ editMode, setEditMode ] = useState(false);
 
-  console.log('partData:', partData);
+  // console.log('partData:', partData);
 
   let buildName = partData.builds.length !== 0 ? partData.builds[0].name : 'none';
 
@@ -26,7 +26,7 @@ const PartItem = ({ name, build, partData, categoryId }) => {
     <li>
       Edit Mode is on for { partData.name }
       <button onClick={toViewMode}>Cancel</button>
-      <EditPartForm partData={partData} categoryId={categoryId} />
+      <EditPartForm partData={partData} categoryId={categoryId} toViewMode={toViewMode} />
     </li>
   )
 }

@@ -106,7 +106,7 @@ export const partFuncs = {
 
   editPart: async (req, res) => {
     const userId = req.session.userId;
-    
+
     if (!userId) {
       return res.send({
         message: 'No user in session',
@@ -114,6 +114,34 @@ export const partFuncs = {
       });
     };
 
-    
+    const { partId, name } = req.body;
+
+    const part = await Part.findByPk(partId);
+
+    if (!part) {
+      return res.send({
+        message: 'Could not find part',
+        success: false
+      });
+    };
+
+    await part.update({
+      name
+    });
+
+    // Is there a better way to confirm that the updated processed successfully? Do I need to check for all part properties being edited?
+    const updatedPart = await Part.findByPk(partId);
+
+    if (updatedPart.name !== name) {
+      return res.send({
+        message: 'Update failed',
+        success: false
+      });
+    };
+
+    return res.send({
+      message: 'Part updated successfully',
+      success: true
+    });
   }
 };

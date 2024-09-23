@@ -62,11 +62,12 @@ app.get('/api/user-builds', getUserBuilds)
 
 // Part endpoints
 import { partFuncs } from './partsCtrl.js';
-const { getPartsData, newPart, getPartTypes } = partFuncs;
+const { getPartsData, newPart, getPartTypes, editPart } = partFuncs;
 
 app.get('/api/parts', getPartsData )
 app.post('/api/new-part', newPart )
 app.get('/api/part-types', getPartTypes )
+app.put('/api/edit-part', editPart )
 
 ViteExpress.listen(app, port, () => {
   console.log(`Server running on http://localhost:${port}`)
