@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import EditPartForm from './EditPartForm';
 
-const PartItem = ({ name, build, partData }) => {
+const PartItem = ({ name, build, partData, categoryId }) => {
   const [ editMode, setEditMode ] = useState(false);
 
-  // console.log('partData:', partData);
+  console.log('partData:', partData);
 
   let buildName = partData.builds.length !== 0 ? partData.builds[0].name : 'none';
 
@@ -26,7 +26,7 @@ const PartItem = ({ name, build, partData }) => {
     <li>
       Edit Mode is on for { partData.name }
       <button onClick={toViewMode}>Cancel</button>
-      <EditPartForm partData={partData} />
+      <EditPartForm partData={partData} categoryId={categoryId} />
     </li>
   )
 }

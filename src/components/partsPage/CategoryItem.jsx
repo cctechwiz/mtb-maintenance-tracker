@@ -10,6 +10,7 @@ const CategoryItem = ({ name, data }) => {
         key={partType.id}
         name={name}
         data={partType.parts}
+        categoryId={partType.categoryId}
       />
     );
   });
