@@ -92,10 +92,10 @@ Part.init(
     lastServiced: {
       type: DataTypes.DATE, // DATE or DATEONLY?
     },
-    milesInterval: {
+    milesInt: {
       type: DataTypes.INTEGER, // Is there ever a case where this would be a float?
     },
-    hoursInterval: {
+    hoursInt: {
       type: DataTypes.INTEGER
     },
     mfrPartNum: {
