@@ -47,12 +47,6 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
       return;
     }
 
-    // TODO: prevent user from submitting non-number in estHours, estMiles, hoursInt, milesInt, modelYear
-    // if (bodyObj.name === '') {
-    //   alert('Please provide a part name.')
-    //   return;
-    // };
-
     const res = await axios.post('/api/new-part', bodyObj);
 
     console.log('new-part axios response:', res.data)
@@ -165,7 +159,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
             <input
               id='est-hours'
               value={estHours}
-              type="text"
+              type="number"
               placeholder='e.g. 8'
               onChange={(e) => setEstHours(e.target.value)}
               />
@@ -176,7 +170,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
             <input
               id='est-miles'
               value={estMiles}
-              type="text"
+              type="number"
               placeholder='e.g. 12.5'
               onChange={(e) => setEstMiles(e.target.value)}
             />
@@ -193,7 +187,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
             <input
               id='time-interval'
               value={hoursInt}
-              type="text"
+              type="number"
               placeholder='e.g. 50'
               onChange={(e) => setHoursInt(e.target.value)}
             />
@@ -203,7 +197,7 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
             <input
               id='miles-int'
               value={milesInt}
-              type="text"
+              type="number"
               placeholder='e.g. 200'
               onChange={(e) => setMilesInt(e.target.value)}
             />
