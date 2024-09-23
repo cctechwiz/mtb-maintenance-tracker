@@ -102,5 +102,18 @@ export const partFuncs = {
       success: true,
       partTypes: partTypes
     });
+  },
+
+  editPart: async (req, res) => {
+    const userId = req.session.userId;
+    
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    
   }
 };
