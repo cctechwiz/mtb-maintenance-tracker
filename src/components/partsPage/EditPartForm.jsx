@@ -6,6 +6,7 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
   const [ name, setName ] = useState(partData.name);
   const [ buildId, setBuildId ] = useState(partData.builds[0]?.id || false);
   const [ milesInt, setMilesInt ] = useState(partData.milesInt || '');
+  const [ hoursInt, setHoursInt ] = useState(partData.hoursInt || '');
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       name,
       buildId,
       milesInt,
-
+      hoursInt,
     };
 
     const res = await axios.put('/api/edit-part', bodyObj);
@@ -38,6 +39,7 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
 
   return (
     <form onSubmit={(e) => handleEdit(e)}>
+      {/* Part Name */}
       <div>
         <label htmlFor="edit-name">Name:</label>
         <input
@@ -57,7 +59,7 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       
       {/* Miles Interval */}
       <div>
-        <label htmlFor="edit-miles-int">Manufacturer Hours Service Interval:</label>
+        <label htmlFor="edit-miles-int">Manufacturer Miles Service Interval:</label>
         <input 
           value={milesInt}
           id="edit-miles-int"
@@ -68,6 +70,16 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Hours Interval */}
+      <div>
+        <label htmlFor="edit-hours-int">Manufacturer Hours Service Interval:</label>
+        <input 
+          value={hoursInt}
+          id="edit-hours-int"
+          type="number"
+          placeholder='e.g. 50'
+          onChange={(e) => setHoursInt(e.target.value)}
+        />
+      </div>
 
       {/* Mfr partNumber */}
 

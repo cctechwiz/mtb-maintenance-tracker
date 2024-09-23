@@ -114,7 +114,7 @@ export const partFuncs = {
       });
     };
 
-    const { partId, name, buildId, milesInt } = req.body;
+    const { partId, name, buildId, milesInt, hoursInt } = req.body;
 
     const part = await Part.findByPk(partId);
     console.log('PART PRE EDIT', part)
@@ -128,7 +128,8 @@ export const partFuncs = {
 
     const updatedPart = await part.update({
       name,
-      milesInt: milesInt === '' ? null : milesInt
+      milesInt: milesInt === '' ? null : milesInt,
+      hoursInt: hoursInt === '' ? null : hoursInt,
     });
 
     // TODO: figure out how to update installation if build changes
