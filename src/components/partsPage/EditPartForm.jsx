@@ -7,6 +7,11 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
   const [ buildId, setBuildId ] = useState(partData.builds[0]?.id || false);
   const [ milesInt, setMilesInt ] = useState(partData.milesInt || '');
   const [ hoursInt, setHoursInt ] = useState(partData.hoursInt || '');
+  const [ mfrPartNum, setMfrPartNum ] = useState(partData.mfrPartNum || '');
+  const [ serialNum, setSerialNum ] = useState(partData.serialNum || '');
+  const [ brand, setBrand ] = useState(partData.brand || '');
+  const [ modelYear, setModelYear ] = useState(partData.modelYear || '');
+  const [ notes, setNotes ] = useState(partData.notes || '');
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -17,6 +22,11 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       buildId,
       milesInt,
       hoursInt,
+      mfrPartNum,
+      serialNum,
+      brand,
+      modelYear,
+      notes,
     };
 
     const res = await axios.put('/api/edit-part', bodyObj);
@@ -82,14 +92,63 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Mfr partNumber */}
+      <div>
+        <label htmlFor="edit-mfr-part-num">Manufacturer Part Number:</label>
+        <input
+          id='edit-mfr-part-num'
+          value={mfrPartNum}
+          type="text"
+          placeholder='e.g. XG-1295'
+          onChange={(e) => setMfrPartNum(e.target.value)}
+        />
+      </div>
 
       {/* Serial Number */}
+      <div>
+        <label htmlFor="edit-serial-num">Serial Number:</label>
+        <input
+          id='edit-serial-num'
+          value={serialNum}
+          type="text"
+          placeholder='Serial Number'
+          onChange={(e) => setSerialNum(e.target.value)}
+        />
+      </div>
 
       {/* Brand */}
+      <div>
+        <label htmlFor="edit-brand">Brand Name:</label>
+        <input
+          id='edit-brand'
+          value={brand}
+          type="text"
+          placeholder='e.g. Sram'
+          onChange={(e) => setBrand(e.target.value)}
+        />
+      </div>
 
       {/* Model Year */}
+      <div>
+        <label htmlFor="edit-model-year">Model Year:</label>
+        <input
+          id='edit-model-year'
+          value={modelYear}
+          type="number"
+          placeholder='e.g. 2023'
+          onChange={(e) => setModelYear(e.target.value)}
+        />
+      </div>
 
       {/* Notes */}
+      <div>
+          <label htmlFor="edit-notes">Part Notes/Details</label>
+          <textarea
+            id='edit-notes'
+            value={notes}
+            placeholder='Notes'
+            onChange={(e) => setNotes(e.target.value)}
+          ></textarea>
+        </div>
 
       <div>
         <input type="submit" />
