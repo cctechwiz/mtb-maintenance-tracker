@@ -35,7 +35,6 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
     };
   };
   
-  // QUESTION: does the state of 'catId' change on render?
   useEffect(() => {
     handlePartTypes();
     setTypeId('');
@@ -48,11 +47,6 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
       <option key={partType.id} value={partType.id}>{name}</option>
     );
   });
-
-  // console.log('partCats:', partCats);
-  // console.log('catId:', catId);
-  // console.log('partTypes:', partTypes);
-  // console.log('partCatOptions:', partCatOptions);
 
   return (
     <>
@@ -72,13 +66,11 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
           {partCatOptions}
         </select>
 
-        {/* QUESTION: How do I get part type to go back to 'default' when a new part category is chosen??? */}
         <label htmlFor="type">Part Type (required):</label>
         <select
           id='type'
           name="part-type"
           value={typeId}
-          // defaultValue='default'
           onChange={(e) => setTypeId(e.target.value)}
         >
           <option value="" disabled >{ catId ? 'Choose a part type' : '-' }</option>
