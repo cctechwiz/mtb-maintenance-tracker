@@ -98,7 +98,7 @@ Part.init(
     hoursInterval: {
       type: DataTypes.INTEGER
     },
-    mfgPartNum: {
+    mfrPartNum: {
       type: DataTypes.STRING,
     },
     serialNum: {
