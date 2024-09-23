@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import EditBuildSelect from './EditBuildSelect.jsx';
 import axios from 'axios';
 
-const EditPartForm = ({ partData, toViewMode }) => {
+const EditPartForm = ({ partData, toViewMode, setParts }) => {
   const [ name, setName ] = useState(partData.name);
   const [ buildId, setBuildId ] = useState(partData.builds[0]?.id || false);
 
@@ -21,7 +21,11 @@ const EditPartForm = ({ partData, toViewMode }) => {
       setName('');
       toViewMode();
 
-      
+      const res = await axios.get('/api/parts');
+
+      if (res.data.success) {
+        setParts(res.data.partsData);
+      };
     }
   };
 

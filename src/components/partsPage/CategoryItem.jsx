@@ -1,7 +1,7 @@
 import React from 'react';
 import PartTypeItem from './PartTypeItem.jsx';
 
-const CategoryItem = ({ name, data }) => {
+const CategoryItem = ({ name, data, setParts }) => {
   const partTypes = data.map((partType) => {
     const name = partType.name.split('_').map((word) => word[0].toUpperCase() + word.substring(1)).join(' ');
 
@@ -11,6 +11,7 @@ const CategoryItem = ({ name, data }) => {
         name={name}
         data={partType.parts}
         categoryId={partType.categoryId}
+        setParts={setParts}
       />
     );
   });

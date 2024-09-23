@@ -14,6 +14,7 @@ const Parts = () => {
         key={part.id}
         name={ name }
         data={part.part_types}
+        setParts={setParts}
       />
     );
   });

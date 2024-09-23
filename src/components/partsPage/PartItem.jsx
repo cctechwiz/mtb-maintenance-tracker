@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import EditPartForm from './EditPartForm';
 
-const PartItem = ({ name, build, partData, categoryId }) => {
+const PartItem = ({ name, build, partData, categoryId, setParts }) => {
   const [ editMode, setEditMode ] = useState(false);
 
   // console.log('partData:', partData);
@@ -26,7 +26,12 @@ const PartItem = ({ name, build, partData, categoryId }) => {
     <li>
       Edit Mode is on for { partData.name }
       <button onClick={toViewMode}>Cancel</button>
-      <EditPartForm partData={partData} categoryId={categoryId} toViewMode={toViewMode} />
+      <EditPartForm
+        partData={partData}
+        categoryId={categoryId}
+        toViewMode={toViewMode}
+        setParts={setParts}
+      />
     </li>
   )
 }

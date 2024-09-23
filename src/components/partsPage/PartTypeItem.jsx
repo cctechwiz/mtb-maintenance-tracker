@@ -1,7 +1,7 @@
 import React from 'react'
 import PartItem from './PartItem';
 
-const PartTypeItem = ({ name, data, categoryId }) => {
+const PartTypeItem = ({ name, data, categoryId, setParts }) => {
 
   const partItems = data.map((part) => {
     return (
@@ -11,6 +11,7 @@ const PartTypeItem = ({ name, data, categoryId }) => {
         build={part.builds} // delete later
         partData={part}
         categoryId={categoryId}
+        setParts={setParts}
       />
     );
   });
