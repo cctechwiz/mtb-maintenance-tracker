@@ -34,7 +34,7 @@ const BuildsSelect = ({ setBuildId }) => {
         <option value="choose" disabled>Choose a build</option>
         {selectOptions}
         <option value="-" disabled>-</option>
-        <option value={false}>Not installed yet</option>
+        <option value={false}>Not installed</option>
       </select>
     </>
   )

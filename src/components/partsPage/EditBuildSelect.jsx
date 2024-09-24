@@ -24,7 +24,7 @@ const EditBuildSelect = ({ buildId, setBuildId }) => {
 
   return (
     <>
-      <label htmlFor="builds-select">Installed on (required):</label>
+      <label htmlFor="builds-select">Installed on:</label>
       <select
         name="builds"
         id="builds-select"
@@ -34,7 +34,7 @@ const EditBuildSelect = ({ buildId, setBuildId }) => {
         <option value="choose" disabled>Choose a build</option>
         {selectOptions}
         <option value="-" disabled>-</option>
-        <option value={false}>Not installed yet</option>
+        <option value={false}>Not installed</option>
       </select>
     </>
   )
