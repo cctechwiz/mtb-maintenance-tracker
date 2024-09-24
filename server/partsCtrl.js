@@ -220,5 +220,47 @@ export const partFuncs = {
       message: 'Part updated successfully',
       success: true
     });
+  },
+
+  deletePart: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { partId } = req.params;
+
+    let partToDelete;
+
+    // Try to find part by partId
+    try {
+      partToDelete = await Part.findByPk(partId);
+    } catch(error) {
+      return res.send({
+        message: 'Failed to find part by partId',
+        success: false,
+        error
+      });
+    };
+
+    // Try to delete part
+    try {
+      partToDelete.destroy();
+
+      return res.send({
+        message: 'Deleted part successfully',
+        success: true
+      });
+    } catch (error) {
+      return res.send({
+        message: 'Failed to delete part',
+        success: false,
+        error
+      });
+    };
   }
 };
