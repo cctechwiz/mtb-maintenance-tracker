@@ -114,10 +114,28 @@ export const partFuncs = {
       });
     };
 
-    const { partId, name, buildId, milesInt, hoursInt, mfrPartNum, serialNum, brand, modelYear, notes } = req.body;
+    const {
+      partId,
+      name,
+      milesInt,
+      hoursInt,
+      mfrPartNum,
+      serialNum,
+      brand,
+      modelYear,
+      notes
+    } = req.body;
 
-    const part = await Part.findByPk(partId);
-    console.log('PART PRE EDIT', part)
+    let { buildId } = req.body;
+
+    if (buildId === 'false') {
+      buildId = false;
+    };
+
+    const part = await Part.findByPk(partId, {
+      include: Build
+    });
+    // console.log('PART PRE EDIT', part)
 
     if (!part) {
       return res.send({
@@ -126,32 +144,54 @@ export const partFuncs = {
       });
     };
 
-    const updatedPart = await part.update({
-      name,
-      milesInt: milesInt === '' ? null : milesInt,
-      hoursInt: hoursInt === '' ? null : hoursInt,
-      mfrPartNum: mfrPartNum === '' ? null : mfrPartNum,
-      serialNum: serialNum === '' ? null : serialNum,
-      brand: brand === '' ? null : brand,
-      modelYear: modelYear === '' ? null : modelYear,
-      notes: notes === '' ? null : notes,
-    });
+    try {
+      // Update Part
+      await part.update({
+        name,
+        milesInt: milesInt === '' ? null : milesInt,
+        hoursInt: hoursInt === '' ? null : hoursInt,
+        mfrPartNum: mfrPartNum === '' ? null : mfrPartNum,
+        serialNum: serialNum === '' ? null : serialNum,
+        brand: brand === '' ? null : brand,
+        modelYear: modelYear === '' ? null : modelYear,
+        notes: notes === '' ? null : notes,
+      });
 
-    // TODO: figure out how to update installation if build changes
+      if (!buildId && part.builds.length > 0) {
+        // user wants to uninstall part from build
+        try {
+          const partBuild = await Build.findByPk(part.builds[0].id);
+          
+          part.removeBuild(partBuild);
 
-    console.log('PART POST EDIT:', updatedPart)
-
-    // How do I confirm that the updated processed successfully? 
-    // Do I need to check for all part properties being edited?
-    // Should I even be checking if it was successful?
-  
-    // Even though the part is updated, and some fields are different, this if statement is evaluating as true.
-    // if (part === updatedPart) {
-    //   return res.send({
-    //     message: 'Update failed or no fields were changed',
-    //     success: false
-    //   });
-    // };
+        } catch(error) {
+          return res.send({
+            message: 'Could not remove part from build',
+            success: false,
+            error
+          });
+        };
+      } else if (buildId && part.builds.length === 0) {
+        console.log();
+        console.log('buildId is truthy, part was not installed');
+        console.log(`user wants to change part from 'not installed' to 'installed'`);
+        console.log();
+      } else if (buildId && (buildId !== part.builds[0].id)) {
+        console.log();
+        console.log('buildId is truthy, part was installed on build');
+        console.log(`user wants to change part from one build to another build`);
+        console.log();
+      } else {
+        console.log();
+        console.log('build did not change');
+        console.log();
+      }
+    } catch (error) {
+      return res.send({
+        message: 'Failed to update part',
+        success: false
+      });
+    }
 
     return res.send({
       message: 'Part updated successfully',
