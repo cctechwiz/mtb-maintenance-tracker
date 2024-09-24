@@ -51,7 +51,10 @@ const Router = () => {
             async () => {
               const res = await axios.get('/api/builds');
               // console.log(`main.jsx res.data:`, res.data)
-              return { buildsData: res.data.success ? res.data.buildsData : res.data.success  }
+              return {
+                userBuilds: res.data.success ? res.data.userBuilds : res.data.success,
+                partCategories: res.data.success ? res.data.partCategories : res.data.success,
+              }
             }
           }
         />

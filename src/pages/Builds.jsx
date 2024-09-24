@@ -6,24 +6,20 @@ import { useLoaderData } from 'react-router-dom';
 
 const Builds = () => {
   const [ displayForm, setDisplayForm ] = useState(false);
-  const [ builds, setBuilds ] = useState(useLoaderData().buildsData)
+  const [ userBuilds, setUserBuilds ] = useState(useLoaderData().userBuilds)
+  const [ partCategories, setPartCategories ] = useState(useLoaderData().partCategories)
 
-  // const { buildsData } = useLoaderData();
-
-  // // QUESTION: Is a useEffect necessary, and why does the useEffect work here?
-  // useEffect(() => {
-  //   if (buildsData) {
-  //     setBuilds(buildsData);
-  //   }
-  // }, []);
+  console.log('userBuilds: ', userBuilds)
   
   // Create BuildItem components
-  const buildItems = builds.map((build) => {
+  const buildItems = userBuilds.map((build, index) => {
     return (
       <BuildItem 
-        key={build.buildId}
-        name={build.buildName}
-        categoriesData={build.categories}
+        key={build.id}
+        data={build}
+        partCategories={partCategories}
+        setUserBuilds={setUserBuilds}
+        // categoriesData={build.categories}
       />
     )
   })
@@ -33,7 +29,7 @@ const Builds = () => {
       <div>
         <h1>Builds</h1>
         {!displayForm && <button onClick={() => setDisplayForm(true)}>Add New Build</button>}
-        {displayForm && <NewBuildForm setBuilds={setBuilds} setDisplayForm={setDisplayForm} />}
+        {displayForm && <NewBuildForm setUserBuilds={setUserBuilds} setDisplayForm={setDisplayForm} />}
       </div>
         
       <div>

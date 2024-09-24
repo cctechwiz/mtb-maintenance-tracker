@@ -13,82 +13,87 @@ export const buildFuncs = {
     };
 
     // Get all builds for the user
-    const userBuilds = await Build.findAll({
-      where: {
-        userId: userId,
-      }
-    });
-    
-    if (!userBuilds) {
+    let userBuilds;
+
+    try {
+      userBuilds = await Build.findAll({
+        where: {
+          userId: userId,
+        },
+        include: {
+          model: Part,
+          include: {
+            model: PartType,
+            include: {
+              model: PartCategory
+            }
+          }
+        }
+      });
+    } catch(error) {
       return res.send({
-        message: 'Failed to get builds data',
+        message: 'Failed to get user builds data',
         success: false,
+        error
       });
     };
 
     // Get parts data associated with each build of 'userBuilds'
-    const partsData = await Promise.all(userBuilds.map((build) => {
-      return PartCategory.findAll({
-        include: {
-          model: PartType,
-          include: {
-            model: Part,
-            include: {
-              model: Build,
-              where: { id: build.id }
-            }
-          }
-        }
-      })
-    }))
+    let partCategories;
 
-    if (!partsData) {
+    try {
+      partCategories = await PartCategory.findAll();
+    } catch (error) {
       return res.send({
-        message: 'Failed to get parts data for builds',
-        success: false
+        message: 'Failed to get part categories',
+        success: false,
+        error
       });
-    };
+    }
 
-    // Restructures data
-    const buildsData = [];
+    // console.log('partsData:', partsData)
 
-    // Builds loop
-    for (let i = 0; i < partsData.length; i++) {
-      const buildName = userBuilds[i].name;
-      const buildId = userBuilds[i].id;
+    // // Restructures data
+    // const buildsData = [];
 
-      buildsData.push({ buildName, buildId });
+    // // Builds loop
+    // for (let i = 0; i < partsData.length; i++) {
+    //   const buildName = userBuilds[i].name;
+    //   const buildId = userBuilds[i].id;
 
-      // Category loop
-      for (let j = 0; j < partsData[i].length; j++) {
-        let categoryName = partsData[i][j].name;
-        categoryName = categoryName[0].toUpperCase() + categoryName.substring(1);
-        const categoryId = partsData[i][j].id;
+    //   buildsData.push({ buildName, buildId });
+
+    //   // Category loop
+    //   for (let j = 0; j < partsData[i].length; j++) {
+    //     let categoryName = partsData[i][j].name;
+    //     categoryName = categoryName[0].toUpperCase() + categoryName.substring(1);
+    //     const categoryId = partsData[i][j].id;
         
-        if (!buildsData[i].categories) {
-          buildsData[i].categories = [];
-        };
+    //     if (!buildsData[i].categories) {
+    //       buildsData[i].categories = [];
+    //     };
         
-        buildsData[i].categories.push({ categoryName, categoryId });
+    //     buildsData[i].categories.push({ categoryName, categoryId });
         
-        // Parts loop
-        for (let k = 0; k < partsData[i][j].part_types.length; k++) {
-          const partName = partsData[i][j].part_types[k].parts[0].name;
-          const partId = partsData[i][j].part_types[k].parts[0].id;
+    //     // Parts loop
+    //     for (let k = 0; k < partsData[i][j].part_types.length; k++) {
+    //       const partName = partsData[i][j].part_types[k].parts[0].name;
+    //       const partId = partsData[i][j].part_types[k].parts[0].id;
           
-          if (!buildsData[i].categories[j].parts) {
-            buildsData[i].categories[j].parts = [];
-          };
+    //       if (!buildsData[i].categories[j].parts) {
+    //         buildsData[i].categories[j].parts = [];
+    //       };
 
-          buildsData[i].categories[j].parts.push({ partName, partId });
-        };
-      };
-    };
+    //       buildsData[i].categories[j].parts.push({ partName, partId });
+    //     };
+    //   };
+    // };
 
     return res.send({
       message: 'Got builds data successfully',
       success: true,
-      buildsData: buildsData,
+      userBuilds,
+      partCategories,
     });
   },
 
