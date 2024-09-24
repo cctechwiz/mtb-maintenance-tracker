@@ -17,11 +17,6 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
   const [ modelYear, setModelYear ] = useState('');
   const [ notes, setNotes ] = useState('');
 
-  // console.log(`name:`, name);
-  // console.log(`brand:`, brand);
-  // console.log(`buildId:`, buildId)
-  // console.log('typeId:', typeId)
-
   // TODO: prevent user from adding a part to build if build already has part in selected partType (add functionality to swap the part???)
 
   const handleNewPart = async (e) => {
@@ -68,7 +63,6 @@ const NewPartForm = ({ setParts, setDisplayForm }) => {
       
       const res = await axios.get('/api/parts');
       
-      console.log('parts axios response:', res.data)
       if (res.data.success) {
         setParts(res.data.partsData)
       };

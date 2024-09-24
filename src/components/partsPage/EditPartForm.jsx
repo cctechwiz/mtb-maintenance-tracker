@@ -31,8 +31,6 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
 
     const res = await axios.put('/api/edit-part', bodyObj);
 
-    console.log('res.data:', res.data)
-
     if (res.data.success) {
       setName('');
       toViewMode();
@@ -44,8 +42,6 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       };
     }
   };
-
-  console.log('partData:', partData)
 
   return (
     <form onSubmit={(e) => handleEdit(e)}>
