@@ -235,5 +235,35 @@ export const buildFuncs = {
         error
       });
     };
+  },
+
+  deleteBuild: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { buildId } = req.params;
+
+    const buildToDelete = await Build.findByPk(buildId);
+
+    try {
+      buildToDelete.destroy();
+
+      return res.send({
+        message: 'Build deleted successfully',
+        success: true
+      });
+    } catch(error) {
+      return res.send({
+        message: 'Failed to delete build',
+        success: false,
+        error
+      });
+    };
   }
 };
