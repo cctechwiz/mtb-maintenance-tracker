@@ -9,7 +9,7 @@ const Builds = () => {
   const [ userBuilds, setUserBuilds ] = useState(useLoaderData().userBuilds)
   const [ partCategories, setPartCategories ] = useState(useLoaderData().partCategories)
 
-  console.log('userBuilds: ', userBuilds)
+  // console.log('userBuilds: ', userBuilds)
   
   // Create BuildItem components
   const buildItems = userBuilds.map((build, index) => {
