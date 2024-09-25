@@ -196,5 +196,44 @@ export const buildFuncs = {
       success: true,
       builds: userBuilds
     });
+  },
+
+  editBuild: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return req.send({
+        message: 'No user in session',
+        success: false,
+      });
+    };
+
+    const { buildId, name } = req.body;
+
+    const buildToEdit = await Build.findByPk(buildId);
+
+    if (!buildToEdit) {
+      return res.send({
+        message: 'Could not find build in db',
+        success: false,
+      });
+    };
+
+    try {
+      buildToEdit.update({
+        name
+      });
+
+      return res.send({
+        message: 'Updated build successfully',
+        success: true
+      });
+    } catch(error) {
+      return res.send({
+        message: 'Failed to update build',
+        success: false,
+        error
+      });
+    };
   }
 };

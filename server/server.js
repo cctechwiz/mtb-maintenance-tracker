@@ -54,11 +54,12 @@ const { getDashboardData } = dashboardFuncs;
 
 // Build endpoints
 import { buildFuncs } from './buildsCtrl.js';
-const { getBuildsData, newBuild, getUserBuilds } = buildFuncs;
+const { getBuildsData, newBuild, getUserBuilds, editBuild } = buildFuncs;
 
 app.get('/api/builds', getBuildsData)
 app.post('/api/new-build', newBuild)
 app.get('/api/user-builds', getUserBuilds)
+app.put('/api/edit-build', editBuild)
 
 // Part endpoints
 import { partFuncs } from './partsCtrl.js';
