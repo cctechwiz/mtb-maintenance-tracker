@@ -1,8 +1,8 @@
 import React from 'react';
 
-const PartItem = ({ name }) => {
+const PartItem = ({ data, setUserBuilds }) => {
   return (
-    <li>{ name }</li>
+    <li>{ data.name }</li>
   );
 };
 
