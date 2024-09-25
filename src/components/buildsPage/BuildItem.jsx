@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const [ editMode, setEditMode ] = useState(false);
+  const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
+  const [ deleteParts, setDeleteParts ] = useState(false)
 
   const categories = partCategories.map((category) => {
     return (
@@ -28,7 +30,7 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const handleDeleteBuild = async (e) => {
     e.preventDefault();
 
-    const res = await axios.delete(`/api/delete-build/${data.id}`);
+    const res = await axios.delete(`/api/delete-build/${data.id}/${deleteParts}`);
 
     console.log('build delete response:', res.data)
 
@@ -46,7 +48,33 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
     <div>
       <h2>{ data.name }</h2>
       <button onClick={toEditMode}>Edit</button>
-      <button onClick={handleDeleteBuild}>Delete</button>
+      {!showDeleteOptions && <button onClick={() => setShowDeleteOptions(true)}>Delete</button>}
+      {showDeleteOptions && 
+        <div>
+          Delete Build?
+          <form onSubmit={handleDeleteBuild}>
+            <div>
+              <label htmlFor="delete-parts">Delete Parts On This Build Too?</label>
+              <input
+                value={deleteParts}
+                type="checkbox"
+                name=""
+                id="delete-parts"
+                onChange={() => setDeleteParts(!deleteParts)}
+              />
+            </div>
+
+            <div>
+              <input
+                type="button"
+                value="Cancel"
+                onClick={() => setShowDeleteOptions(false)}
+              />
+              <input type="submit" value='Delete' />
+            </div>
+          </form>
+        </div>
+      }
       { categories }
     </div>
   ) : (

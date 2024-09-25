@@ -60,7 +60,7 @@ app.get('/api/builds', getBuildsData)
 app.post('/api/new-build', newBuild)
 app.get('/api/user-builds', getUserBuilds)
 app.put('/api/edit-build', editBuild)
-app.delete('/api/delete-build/:buildId', deleteBuild)
+app.delete('/api/delete-build/:buildId/:deleteParts', deleteBuild)
 
 // Part endpoints
 import { partFuncs } from './partsCtrl.js';

@@ -247,15 +247,47 @@ export const buildFuncs = {
       });
     };
 
-    const { buildId } = req.params;
+    const { buildId, deleteParts } = req.params;
 
     const buildToDelete = await Build.findByPk(buildId);
 
+    if (!buildToDelete) {
+      return res.send({
+        message: 'Failed to find build',
+        success: false
+      });
+    };
+
+    if (deleteParts) {
+      try {
+        const parts = await buildToDelete.getParts();
+
+        if (!parts) {
+          return res.send({
+            message: 'Failed to find parts',
+            success: false,
+          });
+        };
+
+        parts.forEach(async (part) => await part.destroy());
+
+      } catch(error) {
+        console.log();
+        console.error(error);
+        console.log();
+
+        return res.send({
+          message: 'Failed to delete parts, Did not delete build',
+          success: false,
+        });
+      };
+    };
+
     try {
-      buildToDelete.destroy();
+      await buildToDelete.destroy();
 
       return res.send({
-        message: 'Build deleted successfully',
+        message: 'Build (and parts, if applicable) deleted successfully',
         success: true
       });
     } catch(error) {
