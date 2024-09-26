@@ -75,6 +75,12 @@ const Router = () => {
         <Route
           path="/maintenance"
           element={ userId ? <Maintenance /> : <Navigate to='/auth' /> }
+          loader={
+            async () => {
+              const res = await axios.get('/api/maintenance');
+              return { maintData: res.data.success ? res.data.maintData : res.data.success }
+            }
+          }
         />
         <Route
           path="/settings"
