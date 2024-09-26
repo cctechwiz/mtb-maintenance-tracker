@@ -70,6 +70,7 @@ const NewServiceForm = ({ setDisplayForm, setServices }) => {
         </div> */}
 
         <div>
+          <button type='button' onClick={() => setDisplayForm(false)}>Cancel</button>
           <input type="submit"/>
         </div>
       </form>
