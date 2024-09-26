@@ -179,7 +179,7 @@ Service.init(
       autoIncrement: true,
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     notes: { // Should this allow null?
