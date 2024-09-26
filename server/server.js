@@ -56,28 +56,29 @@ const { getDashboardData } = dashboardFuncs;
 import { buildFuncs } from './buildsCtrl.js';
 const { getBuildsData, newBuild, getUserBuilds, editBuild, deleteBuild } = buildFuncs;
 
-app.get('/api/builds', getBuildsData)
-app.post('/api/new-build', newBuild)
-app.get('/api/user-builds', getUserBuilds)
-app.put('/api/edit-build', editBuild)
-app.delete('/api/delete-build/:buildId/:deleteParts', deleteBuild)
+app.get('/api/builds', getBuildsData);
+app.post('/api/new-build', newBuild);
+app.get('/api/user-builds', getUserBuilds);
+app.put('/api/edit-build', editBuild);
+app.delete('/api/delete-build/:buildId/:deleteParts', deleteBuild);
 
 // Part endpoints
 import { partFuncs } from './partsCtrl.js';
 const { getPartsData, newPart, getPartTypes, editPart, deletePart } = partFuncs;
 
-app.get('/api/parts', getPartsData)
-app.post('/api/new-part', newPart)
-app.get('/api/part-types', getPartTypes)
-app.put('/api/edit-part', editPart)
-app.delete('/api/delete-part/:partId', deletePart)
+app.get('/api/parts', getPartsData);
+app.post('/api/new-part', newPart);
+app.get('/api/part-types', getPartTypes);
+app.put('/api/edit-part', editPart);
+app.delete('/api/delete-part/:partId', deletePart);
 
 // Maintenance endpoints
 import { maintFuncs } from './maintCtrl.js';
-const { getMaintData, } = maintFuncs;
+const { getMaintData, addService } = maintFuncs;
 
-app.get('/api/maintenance', getMaintData)
+app.get('/api/maintenance', getMaintData);
+app.post('/api/new-service', addService);
 
 ViteExpress.listen(app, port, () => {
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://localhost:${port}`);
 });

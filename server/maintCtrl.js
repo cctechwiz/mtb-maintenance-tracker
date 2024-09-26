@@ -45,6 +45,32 @@ export const maintFuncs = {
       });
     };
 
+    const { partId, date, notes } = req.body;
 
+    // console.log();
+    // console.log('req.body:', req.body)
+    // console.log();
+
+    try {
+      Service.create({
+        partId,
+        date,
+        notes
+      });
+
+      return res.send({
+        message: 'Added new service successfully',
+        success: true
+      });
+    } catch(error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: 'Failed to add new service',
+        success: false
+      });
+    };
   }
 }

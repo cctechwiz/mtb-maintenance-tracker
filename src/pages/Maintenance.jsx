@@ -18,8 +18,9 @@ const Maintenance = () => {
       <div>
         <h1>Maintenance</h1>
         {!displayForm && <button onClick={() => setDisplayForm(true)}>Add Service</button>}
-        {displayForm && <NewServiceForm />}
-        {displayForm && <button onClick={() => setDisplayForm(false)}>Cancel</button>}
+        {displayForm && 
+          <NewServiceForm setDisplayForm={setDisplayForm} setServices={setServices} />
+        }
       </div>
 
       <div>
