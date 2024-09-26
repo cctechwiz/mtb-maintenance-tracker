@@ -180,41 +180,96 @@ export const partFuncs = {
         notes: notes === '' ? null : notes,
       });
 
+      // If user changed build
       if (!buildId && part.builds.length > 0) {
-        // user wants to uninstall part from build
+        // user wants to uninstall part
         try {
           const partBuild = await Build.findByPk(part.builds[0].id);
           
           part.removeBuild(partBuild);
 
         } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+
           return res.send({
-            message: 'Could not remove part from build',
+            message: 'Failed to remove part from build',
             success: false,
-            error
           });
         };
+
       } else if (buildId && part.builds.length === 0) {
-        console.log();
-        console.log('buildId is truthy, part was not installed');
-        console.log(`user wants to change part from 'not installed' to 'installed'`);
-        console.log();
-      } else if (buildId && (buildId !== part.builds[0].id)) {
-        console.log();
-        console.log('buildId is truthy, part was installed on build');
-        console.log(`user wants to change part from one build to another build`);
-        console.log();
+        // user wants to install part on build
+        try {
+          const buildToAdd = await Build.findByPk(buildId);
+
+          if (!buildToAdd) {
+            return res.send({
+              message: 'Failed to find build to add part to',
+              success: false
+            });
+          };
+
+          part.addBuild(buildToAdd);
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+
+          return res.send({
+            message: 'Failed to add part to build',
+            success: false
+          });
+        };
+
+      } else if (buildId && (buildId !== part.builds[0]?.id)) {
+        // if user wants to switch part from one build to another
+        try {
+          const buildToRemove = await Build.findByPk(part.builds[0].id);
+
+          if (!buildToRemove) {
+            return res.send({
+              message: 'Failed to find build to remove part from',
+              success: false
+            });
+          };
+
+          const buildToAdd = await Build.findByPk(buildId);
+
+          if (!buildToAdd) {
+            return res.send({
+              message: 'Failed to find build to add part to',
+              success: false
+            });
+          };
+
+          part.removeBuild(buildToRemove);
+
+          part.addBuild(buildToAdd);
+
+        } catch(error) {
+          console.log();
+          console.error(error);
+          console.log();
+
+          return res.send({
+            message: 'Failed to switch build',
+            success: false
+          });
+        };
+
       } else {
         console.log();
-        console.log('build did not change');
+        console.log('user did not change build, or error with condition logic');
         console.log();
-      }
+      };
     } catch (error) {
       return res.send({
         message: 'Failed to update part',
         success: false
       });
-    }
+    };
 
     return res.send({
       message: 'Part updated successfully',
