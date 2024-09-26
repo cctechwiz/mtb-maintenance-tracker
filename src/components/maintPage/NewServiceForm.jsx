@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PartSelect from './PartSelect';
 
 const NewServiceForm = () => {
   const [ partId, setPartId ] = useState('');
@@ -8,7 +9,7 @@ const NewServiceForm = () => {
   const handleNewService = async (e) => {
     e.preventDefault();
 
-    // TODO: 
+    // TODO: ensure required fields are filled out
   }
 
   return (
@@ -39,6 +40,7 @@ const NewServiceForm = () => {
         </div>
 
         {/* Part Picker */}
+        <PartSelect partId={partId} setPartId={setPartId} />
 
         {/* Reset service interval? (Not necessary until rides are incorporated) */}
         {/* <div>

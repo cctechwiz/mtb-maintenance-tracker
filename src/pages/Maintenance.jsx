@@ -7,14 +7,9 @@ const Maintenance = () => {
   const [ services, setServices ] = useState(useLoaderData().maintData);
   const [ displayForm, setDisplayForm ] = useState(false);
 
-  console.log('services data:', services);
-
   const serviceItems = services.map((service) => {
     return (
-      <ServiceItem
-        key={service.id}
-        data={service}
-      />
+      <ServiceItem key={service.id} data={service} />
     );
   });
 
