@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import NewServiceForm from '../components/maintPage/NewServiceForm.jsx';
+import ServiceItem from '../components/maintPage/ServiceItem.jsx';
 
 const Maintenance = () => {
   const [ services, setServices ] = useState(useLoaderData().maintData);
@@ -9,28 +10,11 @@ const Maintenance = () => {
   console.log('services data:', services);
 
   const serviceItems = services.map((service) => {
-    const formateDate = (date) => {
-      const dateArr = date.split('-');
-      dateArr[0] = dateArr[0].substring(2);
-      const newDate = `${dateArr[1]}/${dateArr[2]}/${dateArr[0]}`;
-      return newDate;
-    }
-
-    const date = formateDate(service.date);
-
-
-
     return (
-      <li key={service.id}>
-        <div>
-          Part: {service.part.name} | 
-          Build: {service.part.builds[0]?.name || 'none'} | 
-          Date: {date}
-        </div>
-        <div>
-          {service.notes && <span>Notes: {service.notes}</span>}
-        </div>
-      </li>
+      <ServiceItem
+        key={service.id}
+        data={service}
+      />
     );
   });
 
@@ -43,7 +27,6 @@ const Maintenance = () => {
         {displayForm && <button onClick={() => setDisplayForm(false)}>Cancel</button>}
       </div>
 
-      {/* Service items */}
       <div>
         <ul>
           { serviceItems }
