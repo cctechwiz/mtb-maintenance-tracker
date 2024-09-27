@@ -6,7 +6,7 @@ import axios from 'axios';
 const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const [ editMode, setEditMode ] = useState(false);
   const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
-  const [ deleteParts, setDeleteParts ] = useState(false)
+  const [ deleteParts, setDeleteParts ] = useState(false);
 
   const categories = partCategories.map((category) => {
     return (
@@ -32,18 +32,15 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
 
     const res = await axios.delete(`/api/delete-build/${data.id}/${deleteParts}`);
 
-    console.log('build delete response:', res.data)
-
     if (res.data.success) {
       const res = await axios.get('/api/builds');
 
       if (res.data.success) {
         setUserBuilds(res.data.userBuilds);
-      }
-    }
-  }
+      };
+    };
+  };
 
-  // console.log('build data:', data)
   return !editMode ? (
     <div>
       <h2>{ data.name }</h2>
