@@ -13,81 +13,47 @@ export const buildFuncs = {
     };
 
     // Get all builds for the user
-    let userBuilds;
-
-    try {
-      userBuilds = await Build.findAll({
-        where: {
-          userId: userId,
-        },
+    const userBuilds = await Build.findAll({
+      where: {
+        userId: userId,
+      },
+      order: ['id'],
+      include: {
+        model: Part,
+        order: ['id'],
         include: {
-          model: Part,
+          model: PartType,
+          order: ['id'],
           include: {
-            model: PartType,
-            include: {
-              model: PartCategory
-            }
+            model: PartCategory,
+            order: ['id'],
           }
         }
-      });
-    } catch(error) {
+      }
+    });
+
+    if (!userBuilds) {
       return res.send({
         message: 'Failed to get user builds data',
-        success: false,
-        error
+        success: false
       });
     };
 
-    // Get parts data associated with each build of 'userBuilds'
-    let partCategories;
+    console.log();
+    console.log('userBuilds:', userBuilds);
+    console.log();
 
-    try {
-      partCategories = await PartCategory.findAll();
-    } catch (error) {
+    // Get parts data associated with each build of 'userBuilds'
+    const partCategories = await PartCategory.findAll({
+      order: ['id']
+    });
+    
+    if (!partCategories) {
       return res.send({
         message: 'Failed to get part categories',
-        success: false,
-        error
+        success: false
       });
-    }
-
-    // console.log('partsData:', partsData)
-
-    // // Restructures data
-    // const buildsData = [];
-
-    // // Builds loop
-    // for (let i = 0; i < partsData.length; i++) {
-    //   const buildName = userBuilds[i].name;
-    //   const buildId = userBuilds[i].id;
-
-    //   buildsData.push({ buildName, buildId });
-
-    //   // Category loop
-    //   for (let j = 0; j < partsData[i].length; j++) {
-    //     let categoryName = partsData[i][j].name;
-    //     categoryName = categoryName[0].toUpperCase() + categoryName.substring(1);
-    //     const categoryId = partsData[i][j].id;
-        
-    //     if (!buildsData[i].categories) {
-    //       buildsData[i].categories = [];
-    //     };
-        
-    //     buildsData[i].categories.push({ categoryName, categoryId });
-        
-    //     // Parts loop
-    //     for (let k = 0; k < partsData[i][j].part_types.length; k++) {
-    //       const partName = partsData[i][j].part_types[k].parts[0].name;
-    //       const partId = partsData[i][j].part_types[k].parts[0].id;
-          
-    //       if (!buildsData[i].categories[j].parts) {
-    //         buildsData[i].categories[j].parts = [];
-    //       };
-
-    //       buildsData[i].categories[j].parts.push({ partName, partId });
-    //     };
-    //   };
-    // };
+    };
 
     return res.send({
       message: 'Got builds data successfully',
