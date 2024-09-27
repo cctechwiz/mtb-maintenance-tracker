@@ -64,7 +64,16 @@ export const buildFuncs = {
   },
 
   newBuild: async (req, res) => {
-    const { buildName, userId, createNewParts } = req.body;
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { buildName, createNewParts } = req.body;
 
     // Get users build names
     let user = await User.findByPk(userId, {
@@ -89,14 +98,21 @@ export const buildFuncs = {
       userId: userId
     });
 
+    if (!newBuild) {
+      return res.send({
+        message: 'Failed to create new build',
+        success: false
+      });
+    };
+
     // Creates a new generic part for each part type if box was checked at submission
     if (createNewParts) {
       const partTypes = await PartType.findAll();
 
       // Formats name string 'partType.name' from snake_case to Title Case
       for (const partObj of partTypes) {
-        partObj.name = partObj.name.split('_').map((word) => {
-          return buildName + ' ' + word[0].toUpperCase() + word.substring(1);
+        partObj.name = buildName + ' ' + partObj.name.split('_').map((word) => {
+          return word[0].toUpperCase() + word.substring(1);
         }).join(' ');
       };
 
