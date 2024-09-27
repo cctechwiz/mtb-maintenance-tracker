@@ -7,7 +7,7 @@ const Parts = () => {
   const [ displayForm, setDisplayForm ] = useState(false);
   const [ parts, setParts ] = useState(useLoaderData().partsData);
 
-  const partItems = parts.map((part) => {
+  const partItems = parts.sort((a, b) => a.id - b.id).map((part) => {
     const name = part.name[0].toUpperCase() + part.name.substring(1)
     return (
       <CategoryItem

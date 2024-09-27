@@ -2,8 +2,7 @@ import React from 'react'
 import PartItem from './PartItem';
 
 const PartTypeItem = ({ name, data, categoryId, setParts }) => {
-
-  const partItems = data.map((part) => {
+  const partItems = data.sort((a, b) => a.id - b.id).map((part) => {
     return (
       <PartItem
         key={part.id}
