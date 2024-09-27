@@ -12,7 +12,7 @@ export const maintFuncs = {
     };
 
     const maintData = await Service.findAll({
-      order: ['id'],
+      order: [['date', 'DESC']],
       include: {
         model: Part,
         where: {
