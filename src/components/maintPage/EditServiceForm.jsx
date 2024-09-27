@@ -11,7 +11,8 @@ const EditServiceForm = ({ toViewMode, data, setServices }) => {
     e.preventDefault();
 
     if (partId === '' || date === '') {
-      alert('Please fill out required fields.')
+      alert('Please fill out required fields.');
+      return;
     };
 
     const bodyObj = {

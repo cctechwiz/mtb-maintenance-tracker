@@ -15,6 +15,11 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
 
   const handleEdit = async (e) => {
     e.preventDefault();
+
+    if (name === '') {
+      alert('Please fill out required fields.')
+      return;
+    };
     
     const bodyObj = {
       partId: partData.id,
@@ -57,11 +62,10 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
         />
       </div>
 
+      {/* Type Id */}
       <div>
         <EditBuildSelect buildId={buildId} setBuildId={setBuildId} />
       </div>
-
-      {/* Type Id */}
       
       {/* Miles Interval */}
       <div>
