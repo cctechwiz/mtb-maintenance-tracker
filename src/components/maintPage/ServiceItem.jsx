@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useActionData } from 'react-router-dom';
 import EditServiceForm from './EditServiceForm.jsx';
 
-const ServiceItem = ({ data }) => {
+const ServiceItem = ({ data, setServices }) => {
   const [ editMode, setEditMode ] = useState(false);
 
   const toEditMode = () => {
@@ -38,7 +38,7 @@ const ServiceItem = ({ data }) => {
   ) : (
     <li>
       <div>
-        <EditServiceForm toViewMode={toViewMode} data={data} />
+        <EditServiceForm toViewMode={toViewMode} data={data} setServices={setServices} />
       </div>
     </li>
   )

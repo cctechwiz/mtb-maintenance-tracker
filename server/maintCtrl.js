@@ -72,5 +72,53 @@ export const maintFuncs = {
         success: false
       });
     };
+  },
+
+  editService: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { serviceId, partId, date, notes } = req.body;
+
+    const serviceToEdit = await Service.findByPk(serviceId);
+
+    if (!serviceToEdit) {
+      return res.send({
+        message: 'Failed to find service',
+        success: false
+      });
+    };
+
+    console.log();
+    console.log('service to be edited:', serviceToEdit);
+    console.log();
+
+    try {
+      await serviceToEdit.update({
+        partId,
+        date,
+        notes: notes === '' ? null : notes
+      });
+
+      return res.send({
+        message: 'Service updated successfully',
+        success: true
+      });
+    } catch(error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: 'Failed to update service',
+        success: false
+      });
+    };
   }
 }

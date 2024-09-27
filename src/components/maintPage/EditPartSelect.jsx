@@ -90,7 +90,7 @@ const EditPartSelect = ({ partId, setPartId, data }) => {
   // console.log('catId state:', catId)
   // console.log('userParts state:', userParts)
   // console.log('userBuilds state:', userBuilds)
-  console.log('partId state:', partId)
+  // console.log('partId state:', partId)
 
   return (
     <div>

@@ -1,15 +1,41 @@
 import React, { useState } from 'react';
 import EditPartSelect from './EditPartSelect.jsx';
+import axios from 'axios';
 
-const EditServiceForm = ({ toViewMode, data }) => {
+const EditServiceForm = ({ toViewMode, data, setServices }) => {
   const [ partId, setPartId ] = useState(data.partId);
   const [ date, setDate ] = useState(data.date);
   const [ notes, setNotes ] = useState(data.notes || '');
 
-  // console.log('date state:', date)
+  const handleEditService = async (e) => {
+    e.preventDefault();
+
+    if (partId === '' || date === '') {
+      alert('Please fill out required fields.')
+    };
+
+    const bodyObj = {
+      serviceId: data.id,
+      partId,
+      date,
+      notes
+    };
+
+    const res = await axios.put('/api/edit-service', bodyObj);
+
+    if (res.data.success) {
+      toViewMode();
+
+      const res = await axios.get('/api/maintenance');
+
+      if (res.data.success) {
+        setServices(res.data.maintData);
+      };
+    };
+  };
 
   return (
-    <form >
+    <form onSubmit={handleEditService}>
       {/* Part Select */}
       <EditPartSelect data={data} setPartId={setPartId} partId={partId} />
 

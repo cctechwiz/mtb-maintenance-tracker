@@ -9,7 +9,7 @@ const Maintenance = () => {
 
   const serviceItems = services.map((service) => {
     return (
-      <ServiceItem key={service.id} data={service} />
+      <ServiceItem key={service.id} data={service} setServices={setServices} />
     );
   });
 
