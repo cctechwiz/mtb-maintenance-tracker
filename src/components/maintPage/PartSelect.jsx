@@ -62,7 +62,7 @@ const PartSelect = ({ partId, setPartId }) => {
           };
 
           // if user selected a build in build dropdown
-          return +buildId === +part.builds[0].id;
+          return +buildId === +part.builds[0]?.id;
           // add part to 'parts' array
         }).forEach((part) => parts.push(part));
       });
