@@ -1,4 +1,4 @@
-import { Service, User, Part, Build } from "../db/model.js";
+import { Service, User, Part, Build, PartType } from "../db/model.js";
 
 export const maintFuncs = {
   getMaintData: async (req, res) => {
@@ -17,7 +17,7 @@ export const maintFuncs = {
         where: {
           userId
         },
-        include: Build
+        include: [Build, PartType]
       }
     });
 

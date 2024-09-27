@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+import EditPartSelect from './EditPartSelect.jsx';
 
 const EditServiceForm = ({ toViewMode, data }) => {
-  console.log('data to edit form:', data)
   const [ partId, setPartId ] = useState(data.partId);
   const [ date, setDate ] = useState(data.date);
   const [ notes, setNotes ] = useState(data.notes || '');
 
-  console.log('date state:', date)
+  // console.log('date state:', date)
 
   return (
     <form >
       {/* Part Select */}
+      <EditPartSelect data={data} setPartId={setPartId} partId={partId} />
 
       {/* Date */}
       <div>
