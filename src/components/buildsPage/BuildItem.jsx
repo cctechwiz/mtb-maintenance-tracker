@@ -8,7 +8,7 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
   const [ deleteParts, setDeleteParts ] = useState(false);
 
-  const categories = partCategories.map((category) => {
+  const categories = partCategories.sort((a, b) => a.id - b.id).map((category) => {
     return (
       <CategoryItem 
         key={category.id}

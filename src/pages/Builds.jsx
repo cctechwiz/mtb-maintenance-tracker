@@ -12,7 +12,7 @@ const Builds = () => {
   // console.log('userBuilds: ', userBuilds)
   
   // Create BuildItem components
-  const buildItems = userBuilds.map((build, index) => {
+  const buildItems = userBuilds.sort((a, b) => a.id - b.id).map((build, index) => {
     return (
       <BuildItem 
         key={build.id}
