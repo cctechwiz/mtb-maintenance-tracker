@@ -130,7 +130,7 @@ export const buildFuncs = {
       // Formats name string 'partType.name' from snake_case to Title Case
       for (const partObj of partTypes) {
         partObj.name = partObj.name.split('_').map((word) => {
-          return word[0].toUpperCase() + word.substring(1);
+          return buildName + ' ' + word[0].toUpperCase() + word.substring(1);
         }).join(' ');
       };
 
