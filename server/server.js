@@ -74,11 +74,12 @@ app.delete('/api/delete-part/:partId', deletePart);
 
 // Maintenance endpoints
 import { maintFuncs } from './maintCtrl.js';
-const { getMaintData, addService, editService } = maintFuncs;
+const { getMaintData, addService, editService, deleteService } = maintFuncs;
 
 app.get('/api/maintenance', getMaintData);
 app.post('/api/new-service', addService);
 app.put('/api/edit-service', editService);
+app.delete('/api/delete-service/:serviceId', deleteService)
 
 ViteExpress.listen(app, port, () => {
   console.log(`Server running on http://localhost:${port}`);

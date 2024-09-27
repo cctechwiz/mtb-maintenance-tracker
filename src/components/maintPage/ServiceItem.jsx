@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useActionData } from 'react-router-dom';
 import EditServiceForm from './EditServiceForm.jsx';
+import axios from 'axios';
 
 const ServiceItem = ({ data, setServices }) => {
   const [ editMode, setEditMode ] = useState(false);
@@ -22,6 +23,22 @@ const ServiceItem = ({ data, setServices }) => {
 
   const date = formateDate(data.date);
 
+  const handleDeleteService = async () => {
+    if (
+      confirm(`Delete Service?`)
+    ) {
+      const res = await axios.delete(`/api/delete-service/${data.id}`);
+
+      if (res.data.success) {
+        const res = await axios.get('/api/maintenance');
+
+        if (res.data.success) {
+          setServices(res.data.maintData);
+        };
+      };
+    };
+  };
+
   return !editMode ? (
     <li>
       <div>
@@ -29,7 +46,7 @@ const ServiceItem = ({ data, setServices }) => {
         Build: {data.part.builds[0]?.name || 'none'} | 
         Date: {date}
         <button onClick={toEditMode}>Edit</button>
-        <button>Delete</button>
+        <button onClick={handleDeleteService}>Delete</button>
       </div>
       <div>
         {data.notes && <span>Notes: {data.notes}</span>}

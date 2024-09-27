@@ -120,5 +120,45 @@ export const maintFuncs = {
         success: false
       });
     };
+  },
+
+  deleteService: async (req, res) => {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.send({
+        message: 'No user in session',
+        success: false
+      });
+    };
+
+    const { serviceId } = req.params;
+
+    const serviceToDelete = await Service.findByPk(serviceId);
+
+    if (!serviceId) {
+      return res.send({
+        message: 'Failed to find service',
+        success: false
+      });
+    };
+
+    try {
+      serviceToDelete.destroy();
+
+      return res.send({
+        message: 'Service deleted successfully',
+        success: true
+      });
+    } catch(error) {
+      console.log();
+      console.error(error);
+      console.log();
+
+      return res.send({
+        message: 'Failed to delete service',
+        success: false
+      });
+    };
   }
 }
