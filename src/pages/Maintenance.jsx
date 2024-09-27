@@ -7,11 +7,9 @@ const Maintenance = () => {
   const [services, setServices] = useState(useLoaderData().maintData);
   const [displayForm, setDisplayForm] = useState(false);
 
-  // console.log('services data', services)
   const serviceItems = services
     .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
     .map((service) => {
-      console.log("service.date", service.date);
       return (
         <ServiceItem
           key={service.id}
