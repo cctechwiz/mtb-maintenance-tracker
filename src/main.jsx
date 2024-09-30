@@ -44,10 +44,10 @@ const Router = () => {
     createRoutesFromElements(
       <Route path="/" element={<App />}>
         {/* TODO: change path of index back to dashboard when dashboard is completed */}
-        {/* <Route index element={ userId ? <Dashboard /> : <Navigate to='/auth' /> } /> */}
+        <Route index element={ userId ? <Navigate to='/builds' /> : <Navigate to='/auth' /> } />
         <Route
-          // path="/builds" // add back when dashboard is loaded at '/'
-          index // remove once dashboard is loaded at '/'
+          path="/builds" // add back when dashboard is loaded at '/'
+          // index // remove once dashboard is loaded at '/'
           element={ userId ? <Builds /> : <Navigate to='/auth' /> }
           loader={
             async () => {
