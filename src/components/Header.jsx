@@ -30,7 +30,7 @@ const Header = () => {
       {/* Mobile View */}
       <nav className="flex lg:hidden justify-between h-[10vh] items-center px-8 bg-blue-dark text-white">
         <div>
-          <NavLink to="/" >MTB Maintenance Tracker</NavLink>
+          <NavLink to="/" ><span className='text-6xl'>MTB Maintenance Tracker</span></NavLink>
         </div>
         <div>
           {userId &&
@@ -42,22 +42,27 @@ const Header = () => {
         {showMenu && (
           <ul className="absolute left-0 top-[10vh] bg-blue-medium h-[90vh] px-5 pt-5">
             <li>
-              <NavLink to="/builds">Builds</NavLink>
+              <NavLink onClick={() => setShowMenu(false)} to="/builds">Builds</NavLink>
             </li>
             <li>
-              <NavLink to="/parts">Parts</NavLink>
-            </li>
-            {/* <li>
-              <NavLink to='/rides'>Rides</NavLink>
-            </li> */}
-            <li>
-              <NavLink to="/maintenance">Maintenance</NavLink>
+              <NavLink onClick={() => setShowMenu(false)} to="/parts">Parts</NavLink>
             </li>
             {/* <li>
-                <NavLink to='/settings'>User Settings</NavLink>
+              <NavLink onClick={() => setShowMenu(false)} to='/rides'>Rides</NavLink>
             </li> */}
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <NavLink onClick={() => setShowMenu(false)} to="/maintenance">Maintenance</NavLink>
+            </li>
+            {/* <li>
+                <NavLink onClick={() => setShowMenu(false)} to='/settings'>User Settings</NavLink>
+            </li> */}
+            <li>
+              <button onClick={() => {
+                handleLogout();
+                setShowMenu(false);
+              }}>
+                Logout
+              </button>
             </li>
           </ul>
         )}
