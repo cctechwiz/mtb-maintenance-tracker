@@ -39,9 +39,9 @@ export const buildFuncs = {
       });
     };
 
-    console.log();
-    console.log('userBuilds:', userBuilds);
-    console.log();
+    // console.log();
+    // console.log('userBuilds:', userBuilds);
+    // console.log();
 
     // Get parts data associated with each build of 'userBuilds'
     const partCategories = await PartCategory.findAll({
