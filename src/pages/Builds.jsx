@@ -26,11 +26,21 @@ const Builds = () => {
 
   return (
     <>
-      <div>
-        <h1>Builds</h1>
-        {!displayForm && <button onClick={() => setDisplayForm(true)}>Add New Build</button>}
-        {displayForm && <NewBuildForm setUserBuilds={setUserBuilds} setDisplayForm={setDisplayForm} />}
+      <div className='flex p-5 gap-5'>
+        <h1 className='text-4xl'>Builds</h1>
+        {!displayForm && 
+          <button
+            className='text-white bg-blue-light rounded-md px-4'
+            onClick={() => setDisplayForm(true)}
+          >
+            Add New Build
+          </button>
+        }
       </div>
+
+      <div>
+        {displayForm && <NewBuildForm setUserBuilds={setUserBuilds} setDisplayForm={setDisplayForm} />}
+      </div>  
         
       <div>
         { buildItems }
