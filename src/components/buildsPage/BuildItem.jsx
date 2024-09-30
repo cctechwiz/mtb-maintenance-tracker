@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import CategoryItem from './CategoryItem.jsx';
 import EditBuildForm from './EditBuildForm.jsx';
 import axios from 'axios';
+import { Collapse } from 'react-collapse';
+import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const [ editMode, setEditMode ] = useState(false);
   const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
   const [ deleteParts, setDeleteParts ] = useState(false);
+  const [ showChildren, setShowChildren ] = useState(false);
 
   const categories = partCategories.sort((a, b) => a.id - b.id).map((category) => {
     return (
@@ -42,10 +47,17 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   };
 
   return !editMode ? (
-    <div>
-      <h2>{ data.name }</h2>
-      <button onClick={toEditMode}>Edit</button>
-      {!showDeleteOptions && <button onClick={() => setShowDeleteOptions(true)}>Delete</button>}
+    <div className='border-2 m-2 rounded-lg'>
+      <div className='flex justify-between m-5'>
+        <div className='flex p-1 gap-2'>
+          <h2 className='text-2xl'>{ data.name }</h2>
+          <button onClick={toEditMode}><MdModeEdit /></button>
+          {!showDeleteOptions && <button onClick={() => setShowDeleteOptions(true)}><MdDelete /></button>}
+        </div>
+        <button onClick={() => setShowChildren(!showChildren)}>
+          {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}
+        </button>
+      </div>
       {showDeleteOptions && 
         <div>
           Delete Build?
@@ -72,14 +84,18 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
           </form>
         </div>
       }
-      { categories }
+      <Collapse isOpened={showChildren}>
+        { categories }
+      </Collapse>
     </div>
   ) : (
     <div>
       <h2> Edit Mode: { data.name }</h2>
       <EditBuildForm data={data} setUserBuilds={setUserBuilds} toViewMode={toViewMode} />
       <button onClick={toViewMode}>Cancel</button>
-      { categories }
+      <Collapse isOpened={showChildren}>
+        { categories }
+      </Collapse>
     </div>
   );
 };
