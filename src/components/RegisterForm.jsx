@@ -43,9 +43,9 @@ const RegisterForm = ({ setShowRegister }) => {
   }
 
   return (
-    <>
+    <div className='flex flex-col items-center pt-20'>
       <div>
-        <h1>Register</h1>
+        <h1 className='text-4xl mb-7'>Register</h1>
       </div>
 
       <div>
@@ -58,6 +58,7 @@ const RegisterForm = ({ setShowRegister }) => {
       <form onSubmit={handleRegister}>
         <div>
           <input
+            className='border-blue-medium border-2 rounded-md p-1 my-1'
             value={email}
             type="email"
             id='email'
@@ -68,6 +69,7 @@ const RegisterForm = ({ setShowRegister }) => {
 
         <div>
           <input
+            className='border-blue-medium border-2 rounded-md p-1 my-1'
             value={name}
             type="text"
             id="name"
@@ -78,6 +80,7 @@ const RegisterForm = ({ setShowRegister }) => {
 
         <div>
           <input
+            className='border-blue-medium border-2 rounded-md p-1 my-1 mb-4'
             value={password}
             type="password"
             id='password'
@@ -86,17 +89,26 @@ const RegisterForm = ({ setShowRegister }) => {
           />
         </div>
 
-        <div>
-          <input type="submit" />
+        <div className='flex justify-center'>
+          <button
+            className='bg-blue-light rounded-md text-white px-4 py-1 mb-10 text-xl'
+            type="submit"
+          >
+            Submit
+          </button>
         </div>
       </form>
 
       <div>
-        <span>Already a user?</span>
-        {/* QUESTION: Should I use a React state or Redux state determine showRegister??? */}
-        <button onClick={() => setShowRegister(false)}>Login Here</button> 
+        <span>Already a user? </span>
+        <button
+          className='border-2 border-blue-light rounded-md px-4 py-1 text-sm text-blue-light'
+          onClick={() => setShowRegister(false)}
+        >
+          Login Here
+        </button> 
       </div>
-    </>
+    </div>
   )
 }
 

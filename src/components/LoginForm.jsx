@@ -43,9 +43,9 @@ const LoginForm = ({ setShowRegister }) => {
   };
 
   return (
-    <>
+    <div className='flex flex-col items-center pt-20'>
       <div>
-        <h1>Login</h1>
+        <h1 className='text-4xl mb-7'>Login</h1>
       </div>
 
       <div>
@@ -58,6 +58,7 @@ const LoginForm = ({ setShowRegister }) => {
       <form onSubmit={handleLogin}>
         <div>
           <input
+            className='border-blue-medium border-2 rounded-md p-1 my-1'
             value={email}
             type="email"
             id='email'
@@ -68,6 +69,7 @@ const LoginForm = ({ setShowRegister }) => {
 
         <div>
           <input
+            className='border-blue-medium border-2 rounded-md p-1 my-1 mb-4'
             value={password}
             type="password"
             id='password'
@@ -76,16 +78,26 @@ const LoginForm = ({ setShowRegister }) => {
           />
         </div>
 
-        <div>
-          <input type="submit" />
+        <div className='flex justify-center'>
+          <button
+            className='bg-blue-light rounded-md text-white px-4 py-1 mb-10 text-xl'
+            type="submit"
+          >
+            Submit
+          </button>
         </div>
       </form>
 
       <div>
-        <span>New user?</span>
-        <button onClick={() => setShowRegister(true)}>Register Here</button> 
+        <span>New user? </span>
+        <button 
+          className='border-2 border-blue-light rounded-md px-4 py-1 text-sm text-blue-light'
+          onClick={() => setShowRegister(true)}
+        >
+          Register Here
+        </button> 
       </div>
-    </>
+    </div>
   )
 }
 
