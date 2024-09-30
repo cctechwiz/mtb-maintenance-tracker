@@ -43,14 +43,15 @@ const Router = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<App />}>
-        <Route index element={ userId ? <Dashboard /> : <Navigate to='/auth' /> } />
+        {/* TODO: change path of index back to dashboard when dashboard is completed */}
+        {/* <Route index element={ userId ? <Dashboard /> : <Navigate to='/auth' /> } /> */}
         <Route
-          path="/builds"
+          // path="/builds" // add back when dashboard is loaded at '/'
+          index // remove once dashboard is loaded at '/'
           element={ userId ? <Builds /> : <Navigate to='/auth' /> }
           loader={
             async () => {
               const res = await axios.get('/api/builds');
-              // console.log(`main.jsx res.data:`, res.data)
               return {
                 userBuilds: res.data.success ? res.data.userBuilds : res.data.success,
                 partCategories: res.data.success ? res.data.partCategories : res.data.success,
@@ -68,10 +69,10 @@ const Router = () => {
             }
           }
         />
-        <Route
+        {/* <Route
           path="/rides"
           element={ userId ? <Rides /> : <Navigate to='/auth' /> }
-        />
+        /> */}
         <Route
           path="/maintenance"
           element={ userId ? <Maintenance /> : <Navigate to='/auth' /> }
@@ -82,10 +83,10 @@ const Router = () => {
             }
           }
         />
-        <Route
+        {/* <Route
           path="/settings"
           element={ userId ? <Settings /> : <Navigate to='/auth' /> }
-        />
+        /> */}
         <Route
           path="/auth"
           element={<Auth />}
