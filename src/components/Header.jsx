@@ -29,10 +29,10 @@ const Header = () => {
     <>
       {/* Mobile View */}
       <nav className="flex lg:hidden justify-between h-[10vh] items-center px-8 bg-blue-dark text-white sticky top-0">
-        <div>
+        <div className="flex items-center">
           <span className='text-2xl'><NavLink to="/" >MTB Maintenance Tracker</NavLink></span>
         </div>
-        <div>
+        <div className="flex items-center">
           {userId &&
             <button>
               <IoMdMenu className="h-[32px] w-[32px]" onClick={() => setShowMenu(!showMenu)} />
@@ -70,11 +70,11 @@ const Header = () => {
 
       {/* Desktop View */}
       <nav className="hidden lg:flex justify-between h-[10vh] items-center px-8 bg-blue-dark text-white sticky top-0">
-        <div>
+        <div className="flex items-center">
           <NavLink className='text-2xl' to="/">MTB Maintenance Tracker</NavLink>
         </div>
         {userId && (
-          <ul className="flex justify-between w-1/3">
+          <ul className="flex justify-between items-center w-1/3">
             <li>
               <NavLink to="/builds">Builds</NavLink>
             </li>
