@@ -50,9 +50,17 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
     <div id='build-card' className='border-2 m-2 p-5 rounded-lg'>
       <div id='build-title' className='flex justify-between'>
         <div className='flex p-1 gap-2'>
-          <h2 className='text-2xl'>{ data.name }</h2>
-          <button onClick={toEditMode}><MdModeEdit /></button>
-          {!showDeleteOptions && <button onClick={() => setShowDeleteOptions(true)}><MdDelete /></button>}
+          <h2 className='text-2xl'>
+            <button onClick={() => setShowChildren(!showChildren)}>
+              { data.name }
+            </button>
+          </h2>
+          <button onClick={toEditMode}><MdModeEdit className='text-gray-300' /></button>
+          {!showDeleteOptions && 
+            <button onClick={() => setShowDeleteOptions(true)}>
+              <MdDelete className='text-red-300' />
+            </button>
+          }
         </div>
         <button onClick={() => setShowChildren(!showChildren)}>
           {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}

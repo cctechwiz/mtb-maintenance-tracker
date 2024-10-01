@@ -23,7 +23,11 @@ const CategoryItem = ({ data, setUserBuilds, category }) => {
   return (
     <>
       <div id='primary-title' className='flex justify-between'>
-        <h3 className='text-xl'>{ catName }</h3>
+        <h3 className='text-xl'>
+          <button onClick={() => setShowChildren(!showChildren)}>
+            { catName }
+          </button>
+        </h3>
         <button onClick={() => setShowChildren(!showChildren)}>
           {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}
         </button>
