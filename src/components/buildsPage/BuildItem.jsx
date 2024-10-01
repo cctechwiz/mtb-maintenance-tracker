@@ -6,6 +6,7 @@ import { Collapse } from 'react-collapse';
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { HiMiniXMark } from "react-icons/hi2";
 
 const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   const [ editMode, setEditMode ] = useState(false);
@@ -67,30 +68,50 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
         </button>
       </div>
       {showDeleteOptions && 
-        <div>
-          Delete Build?
-          <form onSubmit={handleDeleteBuild}>
-            <div>
-              <label htmlFor="delete-parts">Delete Parts On This Build Too?</label>
-              <input
-                value={deleteParts}
-                type="checkbox"
-                name=""
-                id="delete-parts"
-                onChange={() => setDeleteParts(!deleteParts)}
-              />
+        <>
+          <div id='overlay' className='fixed top-0 left-0 right-0 bottom-0 bg-black/60 bg-transparent-70'></div>
+          <div id='delete-modal' className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 z-1000 rounded-lg w-[95%] max-w-md md:max-w-lg lg:max-w-xl'>
+            <div className='flex justify-end items-start'>
+              <button onClick={() => setShowDeleteOptions(false)}>
+                <HiMiniXMark className='h-6 w-6' />
+              </button>
             </div>
+            <div className='mb-5 mx-3'>
+              <h3 className='text-2xl '>Delete "{ data.name }" Build?</h3>
+              <p className='text-sm'>This action can't be undone.</p>
+            </div>
+            <form onSubmit={handleDeleteBuild} className='flex flex-col gap-4 mb-3 mx-3'>
 
-            <div>
-              <input
-                type="button"
-                value="Cancel"
-                onClick={() => setShowDeleteOptions(false)}
-              />
-              <input type="submit" value='Delete' />
-            </div>
-          </form>
-        </div>
+              <div id='part-delete-checkbox-container' className='flex items-center gap-3 mb-2'>
+                <label htmlFor="delete-parts">Delete parts installed on "{ data.name }" too?</label>
+                <input
+                  className='h-5 w-5'
+                  value={deleteParts}
+                  type="checkbox"
+                  name=""
+                  id="delete-parts"
+                  onChange={() => setDeleteParts(!deleteParts)}
+                />
+              </div>
+
+              <div id='buttons-container' className='flex justify-between'>
+                <button
+                  className='text-white bg-gray-400 rounded-md px-4 py-1'
+                  type='button' 
+                  onClick={() => setShowDeleteOptions(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className='text-white bg-red-500 rounded-md px-4 py-1'
+                  type="submit"
+                >
+                  Delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
       }
       <div id='part-categories' className='px-3'>
         <Collapse isOpened={showChildren}>
