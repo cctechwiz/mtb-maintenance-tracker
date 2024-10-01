@@ -70,11 +70,11 @@ const NewBuildForm = ({ setUserBuilds, setDisplayForm }) => {
               checked={newPartsSelected}
               id="create-new-parts"
               onChange={handleNewPartsChange}
-              />
+            />
           </div>
 
           <div>
-            <input className='text-xl text-white bg-blue-light rounded-md px-4 py-1' type="submit" />
+            <button className='text-xl text-white bg-blue-light rounded-md px-4 py-1' type="submit">Submit</button>
           </div>
         </form>
       </div>
