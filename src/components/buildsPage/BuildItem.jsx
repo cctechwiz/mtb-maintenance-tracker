@@ -47,8 +47,8 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   };
 
   return !editMode ? (
-    <div className='border-2 m-2 rounded-lg'>
-      <div className='flex justify-between m-5'>
+    <div id='build-card' className='border-2 m-2 p-5 rounded-lg'>
+      <div id='build-title' className='flex justify-between'>
         <div className='flex p-1 gap-2'>
           <h2 className='text-2xl'>{ data.name }</h2>
           <button onClick={toEditMode}><MdModeEdit /></button>
@@ -84,9 +84,11 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
           </form>
         </div>
       }
-      <Collapse isOpened={showChildren}>
-        { categories }
-      </Collapse>
+      <div id='part-categories' className='px-3'>
+        <Collapse isOpened={showChildren}>
+          { categories }
+        </Collapse>
+      </div>
     </div>
   ) : (
     <div>
