@@ -28,7 +28,7 @@ const Header = () => {
   return (
     <>
       {/* Mobile View */}
-      <nav className="flex lg:hidden justify-between h-[10vh] items-center px-8 bg-blue-dark text-white">
+      <nav className="flex lg:hidden justify-between h-[10vh] items-center px-8 bg-blue-dark text-white sticky top-0">
         <div>
           <span className='text-2xl'><NavLink to="/" >MTB Maintenance Tracker</NavLink></span>
         </div>
@@ -69,7 +69,7 @@ const Header = () => {
       </nav>
 
       {/* Desktop View */}
-      <nav className="hidden lg:flex justify-between h-[10vh] items-center px-8 bg-blue-dark text-white">
+      <nav className="hidden lg:flex justify-between h-[10vh] items-center px-8 bg-blue-dark text-white sticky top-0">
         <div>
           <NavLink className='text-2xl' to="/">MTB Maintenance Tracker</NavLink>
         </div>
