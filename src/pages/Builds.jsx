@@ -23,11 +23,11 @@ const Builds = () => {
   });
 
   return (
-    <div id='page-container' className='w-full max-w-xl pt-5'>
-      <div id='title-container' className='flex p-5 gap-5 w-full justify-between'>
-        <h1 className='text-4xl'>Builds</h1>
+    <div id='page-container' className='page-container'>
+      <div id='title-container' className='title-container'>
+        <h1>Builds</h1>
         <button
-          className='text-white bg-blue-light rounded-md px-4'
+          className='btn-primary'
           onClick={() => setDisplayForm(true)}
         >
           + New Build

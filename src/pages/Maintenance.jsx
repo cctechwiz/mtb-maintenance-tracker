@@ -20,24 +20,28 @@ const Maintenance = () => {
     });
 
   return (
-    <>
-      <div>
+    <div className="page-container">
+      <div className="title-container">
         <h1>Maintenance</h1>
-        {!displayForm && (
-          <button onClick={() => setDisplayForm(true)}>Add Service</button>
-        )}
-        {displayForm && (
-          <NewServiceForm
-            setDisplayForm={setDisplayForm}
-            setServices={setServices}
-          />
-        )}
+        <button
+          className='btn-primary'
+          onClick={() => setDisplayForm(true)}
+        >
+          + Service
+        </button>
       </div>
+
+      {displayForm && (
+        <NewServiceForm
+          setDisplayForm={setDisplayForm}
+          setServices={setServices}
+        />
+      )}
 
       <div>
         <ul>{serviceItems}</ul>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -20,17 +20,23 @@ const Parts = () => {
   });
 
   return (
-    <>
-      <div>
-        <h1>Parts</h1>
-        {!displayForm && <button onClick={() => setDisplayForm(true)}>Add New Part</button>}
-        {displayForm && <NewPartForm setParts={setParts} setDisplayForm={setDisplayForm} />}
+    <div id='page-container' className='w-full max-w-xl'>
+      <div id='title-container' className='flex p-5 gap-5 w-full justify-between'>
+        <h1 className='text-4xl'>Parts</h1>
+        <button
+          className='text-white bg-blue-light rounded-md px-4'
+          onClick={() => setDisplayForm(true)}
+        >
+          + New Part
+        </button>
       </div>
+      
+      {displayForm && <NewPartForm setParts={setParts} setDisplayForm={setDisplayForm} />}
 
       <div>
         { partItems }
       </div>
-    </>
+    </div>
   );
 }
 

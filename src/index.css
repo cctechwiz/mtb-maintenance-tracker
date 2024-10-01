@@ -2,6 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-button:hover {
-  cursor: pointer;
+@layer base {
+  h1 {
+    @apply text-4xl;
+  }
+
+  button {
+    @apply cursor-pointer
+  }
 }
+
+@layer components {
+  .page-container {
+    @apply w-full max-w-xl;
+  }
+
+  .title-container {
+    @apply flex p-5 gap-5 w-full justify-between;
+  }
+
+  .btn-primary {
+    @apply text-white bg-blue-light border-2 border-blue-light rounded-md px-4 py-1;
+  }
+}
+
+
+
+
+/* button:hover {
+  cursor: pointer;
+} */
+
+/* .page-container {
+  width: 100%;
+  max-width: 36rem;
+}
+
+.title-container {
+  display: flex;
+  padding: 1.25rem;
+  gap: 5;
+  width: 100%;
+  justify-content: space-between;
+} */
