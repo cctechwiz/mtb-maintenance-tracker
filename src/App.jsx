@@ -10,7 +10,7 @@ function App() {
     <>
       <Header />
       
-      <main>
+      <main className='flex justify-center w-full'>
         <Outlet />
       </main>
     </>

@@ -21,20 +21,22 @@ const CategoryItem = ({ data, setUserBuilds, category }) => {
   });
 
   return (
-    <div className='p-0'>
-      <div className='flex justify-between'>
+    <>
+      <div id='primary-title' className='flex justify-between'>
         <h3 className='text-xl'>{ catName }</h3>
         <button onClick={() => setShowChildren(!showChildren)}>
           {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}
         </button>
       </div>
 
-      <Collapse isOpened={showChildren}>
-        <ul>
-          { parts }
-        </ul>
-      </Collapse>
-    </div>
+      <div id='secondary-container' className='px-3'>
+        <Collapse isOpened={showChildren}>
+          <ul>
+            { parts }
+          </ul>
+        </Collapse>
+      </div>
+    </>
   );
 };
 

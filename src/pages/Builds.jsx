@@ -25,15 +25,15 @@ const Builds = () => {
   })
 
   return (
-    <>
-      <div className='flex p-5 gap-5'>
+    <div id='page-container' className='w-full max-w-xl pt-20'>
+      <div id='title-container' className='flex p-5 gap-5 w-full justify-between'>
         <h1 className='text-4xl'>Builds</h1>
         {!displayForm && 
           <button
             className='text-white bg-blue-light rounded-md px-4'
             onClick={() => setDisplayForm(true)}
           >
-            Add New Build
+            + New Build
           </button>
         }
       </div>
@@ -42,10 +42,10 @@ const Builds = () => {
         {displayForm && <NewBuildForm setUserBuilds={setUserBuilds} setDisplayForm={setDisplayForm} />}
       </div>  
         
-      <div>
+      <div id='primary-container'>
         { buildItems }
       </div>
-    </>
+    </div>
   )
 }
 
