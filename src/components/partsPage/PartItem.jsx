@@ -49,10 +49,16 @@ const PartItem = ({ partData, categoryId, setParts }) => {
           >
             { partData.name }
           </button>
-          <button onClick={toEditMode}>
+          <button
+            className='tertiary-icon-gray'
+            onClick={toEditMode}
+          >
             <MdModeEdit />
           </button>
-          <button onClick={handleDeletePart}>
+          <button
+            className='tertiary-icon-red'
+            onClick={handleDeletePart}
+          >
             <MdDelete />
           </button>
         </div>

@@ -145,6 +145,14 @@
     @apply flex px-1 gap-2
   }
 
+  .tertiary-icon-gray {
+    @apply text-gray-300;
+  }
+
+  .tertiary-icon-red {
+    @apply text-red-300;
+  }
+
   /* Quaternary */
   .quaternary-items-container {
     @apply px-3;
