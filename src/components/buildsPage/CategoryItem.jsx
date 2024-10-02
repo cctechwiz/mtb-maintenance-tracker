@@ -22,8 +22,8 @@ const CategoryItem = ({ data, setUserBuilds, category }) => {
 
   return (
     <>
-      <div id='primary-title' className='flex justify-between'>
-        <h3 className='text-xl'>
+      <div id='part-category-title' className='secondary-row-container'>
+        <h3>
           <button onClick={() => setShowChildren(!showChildren)}>
             { catName }
           </button>
@@ -33,7 +33,7 @@ const CategoryItem = ({ data, setUserBuilds, category }) => {
         </button>
       </div>
 
-      <div id='secondary-container' className='px-3'>
+      <div id='part-container' className='tertiary-items-container'>
         <Collapse isOpened={showChildren}>
           <ul>
             { parts }

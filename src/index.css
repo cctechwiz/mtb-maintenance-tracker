@@ -11,6 +11,10 @@
     @apply text-2xl;
   }
 
+  h3 {
+    @apply text-xl;
+  }
+
   button {
     @apply cursor-pointer
   }
@@ -121,6 +125,15 @@
 
   /* Secondary */
   .secondary-items-container {
+    @apply px-3;
+  }
+
+  .secondary-row-container {
+    @apply flex justify-between;
+  }
+
+  /* Tertiary */
+  .tertiary-items-container {
     @apply px-3;
   }
 }
