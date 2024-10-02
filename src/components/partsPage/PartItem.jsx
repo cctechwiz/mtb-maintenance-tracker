@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import EditPartForm from './EditPartForm';
 import axios from 'axios';
+import { Collapse } from 'react-collapse';
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
 
 const PartItem = ({ partData, categoryId, setParts }) => {
   const [ editMode, setEditMode ] = useState(false);
+  const [ showChildren, setShowChildren ] = useState(false);
 
   // console.log('partData:', partData);
 
@@ -37,9 +42,29 @@ const PartItem = ({ partData, categoryId, setParts }) => {
 
   return !editMode ? (
     <li>
-      <span>Part name: { partData.name } | installed on: {buildName}</span>
-      <button onClick={toEditMode}>Edit</button>
-      <button onClick={handleDeletePart}>Delete</button>
+      <div className='tertiary-row-container'>
+        <div className="tertiary-title-container">
+          <button
+            onClick={() => setShowChildren(!showChildren)}
+          >
+            { partData.name }
+          </button>
+          <button onClick={toEditMode}>
+            <MdModeEdit />
+          </button>
+          <button onClick={handleDeletePart}>
+            <MdDelete />
+          </button>
+        </div>
+        <button onClick={() => setShowChildren(!showChildren)}>
+          {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}
+        </button>
+      </div>
+      <Collapse isOpened={showChildren}>
+        <div className="quaternary-items-container">
+          <span>Installed on: {buildName}</span>
+        </div>
+      </Collapse>
     </li>
   ) : (
     <li>

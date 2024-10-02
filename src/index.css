@@ -111,8 +111,8 @@
     @apply flex justify-between;
   }
 
-  .primary-title {
-    @apply flex p-1 gap-2;
+  .primary-title-container {
+    @apply flex px-1 gap-2;
   }
 
   .primary-icon-gray {
@@ -136,5 +136,17 @@
   .tertiary-items-container {
     @apply px-3;
   }
-}
 
+  .tertiary-row-container {
+    @apply flex justify-between;
+  }
+
+  .tertiary-title-container {
+    @apply flex px-1 gap-2
+  }
+
+  /* Quaternary */
+  .quaternary-items-container {
+    @apply px-3;
+  }
+}
