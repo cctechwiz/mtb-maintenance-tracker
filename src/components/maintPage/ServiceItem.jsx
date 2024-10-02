@@ -4,6 +4,7 @@ import EditServiceForm from './EditServiceForm.jsx';
 import axios from 'axios';
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { HiMiniXMark } from "react-icons/hi2";
 
 const ServiceItem = ({ data, setServices }) => {
   const [ editMode, setEditMode ] = useState(false);
@@ -54,6 +55,40 @@ const ServiceItem = ({ data, setServices }) => {
           <button onClick={() => setShowDeleteOptions(true)}><MdDelete className='primary-icon-red' /></button>
         </div>
       </div>
+
+      {showDeleteOptions &&
+        <>
+          <div className="overlay" />
+          <div className="modal">
+            <div id='modal-x-container' className='modal-x-container'>
+              <button onClick={() => setShowDeleteOptions(false)}>
+                <HiMiniXMark className='modal-x-icon' />
+              </button>
+            </div>
+            <div className="modal-title-container">
+              <h2>Delete service for <i>{data.part.name}</i> on {date}</h2>
+              <p className='text-sm'>This action can't be undone.</p>
+            </div>
+            <form className="modal-form" onSubmit={handleDeleteService}>
+              <div className="modal-bottom-btns-container">
+                <button
+                  className='btn-cancel'
+                  type='button' 
+                  onClick={() => setShowDeleteOptions(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className='btn-delete'
+                  type="submit"
+                >
+                  Delete
+                </button>
+              </div>
+            </form>
+          </div>
+        </>
+      }
     </li>
   ) : (
     <li>
