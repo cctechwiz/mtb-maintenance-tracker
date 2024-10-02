@@ -25,11 +25,11 @@ const EditBuildForm = ({ data, setUserBuilds, toViewMode }) => {
   };
 
   return (
-    <form onSubmit={handleEditBuild} className='flex flex-col gap-4 mb-3 mx-3'>
-      <div id='edit-build-name-container' className='flex flex-col'>
-        <label htmlFor="edit-build-name">Build Name:</label>
+    <form onSubmit={handleEditBuild} className='modal-form'>
+      <div id='edit-build-name-container' className='input-container'>
+        <label className='input-label' htmlFor="edit-build-name">Build Name:</label>
         <input
-          className='border-2 border-blue-medium rounded-md p-1'
+          className='input-field'
           value={name}
           id='edit-build-name'
           type="text"
@@ -37,16 +37,16 @@ const EditBuildForm = ({ data, setUserBuilds, toViewMode }) => {
         />
       </div>
 
-      <div id='button-container' className='flex justify-between mt-2'>
+      <div id='button-container' className='modal-bottom-btns-container'>
         <button 
-          className='text-gray-400 bg-white border-2 border-gray-400 rounded-md px-4 py-1'
+          className='btn-cancel'
           type='button'
           onClick={toViewMode}
         >
           Cancel
         </button>
         <button 
-          className='text-xl text-white bg-blue-light border-2 border-blue-light rounded-md px-4 py-1'
+          className='btn-submit'
           type="submit"
         >
           Submit

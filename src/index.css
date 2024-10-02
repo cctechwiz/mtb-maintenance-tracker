@@ -73,13 +73,25 @@
     @apply h-5 w-5;
    }
 
+   .input-container {
+    @apply flex flex-col;
+   }
+
+   .input-label {
+    @apply text-base;
+   }
+
+   .input-field {
+    @apply border-2 border-blue-medium rounded-md p-1;
+   }
+
    /* Buttons */
    .btn-cancel {
     @apply text-gray-400 bg-white border-2 border-gray-400 rounded-md px-4 py-1;
    }
 
    .btn-submit {
-    @apply
+    @apply text-white bg-blue-light border-2 border-blue-light rounded-md px-4 py-1;
    }
 
    .btn-delete {
