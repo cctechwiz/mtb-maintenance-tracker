@@ -84,7 +84,12 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
             <form onSubmit={handleDeleteBuild} className='modal-form'>
 
               <div id='part-delete-checkbox-container' className='checkbox-container'>
-                <label htmlFor="delete-parts">Delete parts installed on <i>{ data.name }</i> too?</label>
+                <label
+                  className='checkbox-label'
+                  htmlFor="delete-parts"
+                >
+                  Delete parts installed on <i>{ data.name }</i> too?
+                </label>
                 <input
                   className='checkbox'
                   value={deleteParts}

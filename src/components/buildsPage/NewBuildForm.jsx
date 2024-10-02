@@ -40,19 +40,21 @@ const NewBuildForm = ({ setUserBuilds, setDisplayForm }) => {
 
   return (
     <>
-      <div id="overlay" className='fixed top-0 left-0 right-0 bottom-0 bg-black/60 bg-transparent-70'></div>
-      <div id="modal" className='fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 z-1000 rounded-lg w-[95%] max-w-md md:max-w-lg lg:max-w-xl'>
-        <div className='flex justify-end items-start'>
+      <div id="overlay" className='overlay' />
+      <div id="modal" className='modal'>
+        <div className='modal-x-container'>
           <button type="button" onClick={() => setDisplayForm(false)}>
-            <HiMiniXMark className='h-6 w-6' />
+            <HiMiniXMark className='modal-x-icon' />
           </button>
         </div>
-        <h3 className='text-2xl mb-5 mx-3'>Create New Build</h3>
-        <form onSubmit={handleNewBuild} className='flex flex-col gap-4 mb-3 mx-3'>
-          <div className='flex flex-col'>
-            <label className='text-sm' htmlFor="build-name">Build Name<sup>*</sup>:</label>
+        <div className="modal-title-container">
+          <h2>Create New Build</h2>
+        </div>
+        <form onSubmit={handleNewBuild} className='modal-form'>
+          <div className='input-container'>
+            <label className='input-label' htmlFor="build-name">Build Name<sup>*</sup>:</label>
             <input
-              className='border-2 border-blue-medium rounded-md p-1'
+              className='input-field'
               value={name}
               id='build-name'
               type="text" 
@@ -61,10 +63,15 @@ const NewBuildForm = ({ setUserBuilds, setDisplayForm }) => {
               />
           </div>
 
-          <div className='flex items-center gap-3'>
-            <label htmlFor="create-new-parts">Create new parts for this build?</label>
+          <div className='checkbox-container'>
+            <label 
+              className='checkbox-label'
+              htmlFor="create-new-parts"
+            >
+              Create new parts for this build?
+            </label>
             <input
-              className='h-5 w-5'
+              className='checkbox'
               value={newPartsSelected}
               type="checkbox"
               checked={newPartsSelected}
@@ -73,8 +80,20 @@ const NewBuildForm = ({ setUserBuilds, setDisplayForm }) => {
             />
           </div>
 
-          <div>
-            <button className='text-xl text-white bg-blue-light rounded-md px-4 py-1' type="submit">Submit</button>
+          <div className='modal-bottom-btns-container'>
+            <button
+              className='btn-cancel'
+              type="button"
+              onClick={() => setDisplayForm(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className='btn-submit'
+              type="submit"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
