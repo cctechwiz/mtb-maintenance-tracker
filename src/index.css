@@ -123,6 +123,18 @@
     @apply border-2 border-blue-medium rounded-md p-1;
    }
 
+   .date-container {
+    @apply flex flex-col;
+   }
+
+   .date-label {
+    @apply text-base;
+   }
+
+   .date {
+    @apply border-2 border-blue-medium rounded-md p-1;
+   }
+
    /* Buttons */
    .btn-cancel {
     @apply text-gray-400 bg-white border-2 border-gray-400 rounded-md px-4 py-1;

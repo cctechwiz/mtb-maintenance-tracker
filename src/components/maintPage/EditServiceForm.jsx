@@ -36,26 +36,30 @@ const EditServiceForm = ({ toViewMode, data, setServices }) => {
   };
 
   return (
-    <form onSubmit={handleEditService}>
+    <form onSubmit={handleEditService} className='modal-form'>
       {/* Part Select */}
       <EditPartSelect data={data} setPartId={setPartId} partId={partId} />
 
       {/* Date */}
-      <div>
-        <label htmlFor="edit-service-date">Date of Service:</label>
-        <input
-          value={date}
-          type="date"
-          name="edit-service-date"
-          id="edit-service-date"
-          onChange={(e) => setDate(e.target.value)}
-        />
+      <div className='date-container'>
+        <label className='date-label' htmlFor="edit-service-date">Date of Service:</label>
+        <div>
+          <input
+            className='date'
+            value={date}
+            type="date"
+            name="edit-service-date"
+            id="edit-service-date"
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
       </div>
 
       {/* Notes */}
-      <div>
-        <label htmlFor="edit-notes">Service Notes:</label>
-        <textarea 
+      <div className='text-area-container'>
+        <label className='text-area-label' htmlFor="edit-notes">Service Notes:</label>
+        <textarea
+          className='text-area-field'
           value={notes} 
           name="edit-notes"
           id="edit-notes" 
@@ -63,9 +67,9 @@ const EditServiceForm = ({ toViewMode, data, setServices }) => {
         ></textarea>
       </div>
 
-      <div>
-        <button type='button' onClick={toViewMode} >Cancel</button>
-        <input type="submit" />
+      <div className='modal-bottom-btns-container'>
+        <button className='btn-cancel' type='button' onClick={toViewMode} >Cancel</button>
+        <button className='btn-submit' type="submit">Submit</button>
       </div>
     </form>
   );

@@ -41,7 +41,7 @@ const ServiceItem = ({ data, setServices }) => {
     };
   };
 
-  return !editMode ? (
+  return (
     <li>
       <div className='card-container flex justify-between'>
         <div>
@@ -89,12 +89,29 @@ const ServiceItem = ({ data, setServices }) => {
           </div>
         </>
       }
-    </li>
-  ) : (
-    <li>
-      <div>
-        <EditServiceForm toViewMode={toViewMode} data={data} setServices={setServices} />
-      </div>
+
+      {editMode &&
+        <>
+          <div className="overlay" />
+          <div className='modal'>
+            <div className='modal-x-container'>
+              <button onClick={toViewMode}>
+                <HiMiniXMark className='modal-x-icon' />
+              </button>
+            </div>
+
+            <div className="modal-title-container">
+              <h2>Edit Service</h2>
+            </div>
+
+            <EditServiceForm
+              toViewMode={toViewMode}
+              data={data}
+              setServices={setServices}
+            />
+          </div>
+        </>
+      }
     </li>
   )
 };
