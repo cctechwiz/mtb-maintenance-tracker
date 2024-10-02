@@ -50,7 +50,7 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
   return (
     <div id='build-card' className='card-container'>
       <div id='build-row-container' className='primary-row-container'>
-        <div className='primary-title'>
+        <div className='primary-title-container'>
           <h2>
             <button onClick={() => setShowChildren(!showChildren)}>
               { data.name }
