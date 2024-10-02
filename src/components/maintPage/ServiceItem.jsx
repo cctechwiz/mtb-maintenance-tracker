@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useActionData } from 'react-router-dom';
 import EditServiceForm from './EditServiceForm.jsx';
 import axios from 'axios';
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const ServiceItem = ({ data, setServices }) => {
   const [ editMode, setEditMode ] = useState(false);
+  const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
 
   const toEditMode = () => {
     setEditMode(true);
@@ -23,33 +26,33 @@ const ServiceItem = ({ data, setServices }) => {
 
   const date = formateDate(data.date);
 
-  const handleDeleteService = async () => {
-    if (
-      confirm(`Delete Service?`)
-    ) {
-      const res = await axios.delete(`/api/delete-service/${data.id}`);
+  const handleDeleteService = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.delete(`/api/delete-service/${data.id}`);
+
+    if (res.data.success) {
+      const res = await axios.get('/api/maintenance');
 
       if (res.data.success) {
-        const res = await axios.get('/api/maintenance');
-
-        if (res.data.success) {
-          setServices(res.data.maintData);
-        };
+        setServices(res.data.maintData);
       };
     };
   };
 
   return !editMode ? (
     <li>
-      <div>
-        Part: {data.part.name} | 
-        Build: {data.part.builds[0]?.name || 'none'} | 
-        Date: {date}
-        <button onClick={toEditMode}>Edit</button>
-        <button onClick={handleDeleteService}>Delete</button>
-      </div>
-      <div>
-        {data.notes && <span>Notes: {data.notes}</span>}
+      <div className='card-container flex justify-between'>
+        <div>
+          <p>Part: {data.part.name}</p>
+          <p>Build: {data.part.builds[0]?.name || 'none'}</p>
+          <p>Date: {date}</p>
+          {data.notes && <p>Notes: {data.notes}</p>}
+        </div>
+        <div className='flex items-start gap-2'>
+          <button onClick={toEditMode}><MdModeEdit className='primary-icon-gray' /></button>
+          <button onClick={() => setShowDeleteOptions(true)}><MdDelete className='primary-icon-red' /></button>
+        </div>
       </div>
     </li>
   ) : (
