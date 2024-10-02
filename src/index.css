@@ -7,12 +7,17 @@
     @apply text-4xl;
   }
 
+  h2 {
+    @apply text-2xl;
+  }
+
   button {
     @apply cursor-pointer
   }
 }
 
 @layer components {
+  /* Page */
   .page-container {
     @apply w-full max-w-xl;
   }
@@ -24,24 +29,83 @@
   .btn-primary {
     @apply text-white bg-blue-light border-2 border-blue-light rounded-md px-4 py-1;
   }
+
+  /* Card */
+  .card-container {
+    @apply border-2 rounded-lg m-2 p-5;
+  }
+
+   /* Modal */
+   .overlay {
+    @apply fixed top-0 left-0 right-0 bottom-0 bg-black/60 z-[1000];
+   }
+
+   .modal {
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 z-[1000] rounded-lg w-[95%] max-w-md md:max-w-lg lg:max-w-xl;
+   }
+
+   .modal-x-container {
+    @apply flex justify-end items-start;
+   }
+
+   .modal-x-icon {
+    @apply h-6 w-6;
+   }
+
+   .modal-title-container {
+    @apply mb-5 mx-3;
+   }
+
+   .modal-bottom-btns-container {
+    @apply flex justify-between mt-4;
+   }
+
+   /* Form */
+   .modal-form {
+    @apply flex flex-col gap-4 mb-3 mx-3;
+   }
+
+   .checkbox-container {
+    @apply flex items-center gap-3;
+   }
+
+   .checkbox {
+    @apply h-5 w-5;
+   }
+
+   /* Buttons */
+   .btn-cancel {
+    @apply text-gray-400 bg-white border-2 border-gray-400 rounded-md px-4 py-1;
+   }
+
+   .btn-submit {
+    @apply
+   }
+
+   .btn-delete {
+    @apply text-white bg-red-500 border-2 border-red-500 rounded-md px-4 py-1;
+   }
+
+  /* Primary */
+  .primary-row-container {
+    @apply flex justify-between;
+  }
+
+  .primary-title {
+    @apply flex p-1 gap-2;
+  }
+
+  .primary-icon-gray {
+    @apply text-gray-300 h-5 w-5;
+  }
+
+  .primary-icon-red {
+    @apply text-red-300 h-5 w-5;
+  }
+
+  /* Secondary */
+  .secondary-items-container {
+    @apply px-3;
+  }
 }
 
-
-
-
-/* button:hover {
-  cursor: pointer;
-} */
-
-/* .page-container {
-  width: 100%;
-  max-width: 36rem;
-}
-
-.title-container {
-  display: flex;
-  padding: 1.25rem;
-  gap: 5;
-  width: 100%;
-  justify-content: space-between;
-} */
