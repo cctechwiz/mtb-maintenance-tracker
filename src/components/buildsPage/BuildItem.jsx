@@ -135,7 +135,6 @@ const BuildItem = ({ data, partCategories, setUserBuilds }) => {
             </div>
 
             <EditBuildForm
-              className='modal-form'
               data={data}
               setUserBuilds={setUserBuilds}
               toViewMode={toViewMode}
