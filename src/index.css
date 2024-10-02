@@ -41,7 +41,7 @@
    }
 
    .modal {
-    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 z-[1000] rounded-lg w-[95%] max-w-md md:max-w-lg lg:max-w-xl;
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 z-[1000] rounded-lg w-[95%] max-w-md md:max-w-lg lg:max-w-xl max-h-[80vh];
    }
 
    .modal-x-container {
@@ -62,8 +62,14 @@
 
    /* Form */
    .modal-form {
-    @apply flex flex-col gap-4 mb-3 mx-3;
+    @apply flex flex-col gap-4 mb-3 mx-3 max-h-[500px] md:max-h-[600px] overflow-y-auto;
    }
+
+   .form-sub-container {
+    @apply pl-3;
+   }
+
+   
 
    .checkbox-container {
     @apply flex items-center gap-3;
@@ -91,6 +97,10 @@
 
    .select-container {
     @apply flex flex-col;
+   }
+
+   .nested-select-container {
+    @apply flex flex-col pl-3 pt-1;
    }
 
    .select-label {

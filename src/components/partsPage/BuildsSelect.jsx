@@ -24,8 +24,9 @@ const BuildsSelect = ({ setBuildId }) => {
 
   return (
     <>
-      <label htmlFor="builds-select">Installed on (required):</label>
+      <label className='select-label' htmlFor="builds-select">Installed on<sup>*</sup>:</label>
       <select
+        className='select'
         name="builds"
         id="builds-select"
         defaultValue='choose'

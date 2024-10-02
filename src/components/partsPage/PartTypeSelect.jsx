@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import axios from 'axios';;
+import React, { useEffect, useState } from 'react';
 
 const PartTypeSelect = ({ setTypeId, typeId }) => {
   const [ partCats, setPartCats ] = useState([]);
@@ -10,8 +10,8 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
     const res = await axios.get('/api/part-types');
 
     if (res.data.success) {
-      setPartCats(res.data.partTypes)
-    }
+      setPartCats(res.data.partTypes);
+    };
   };
 
   useEffect(() => {
@@ -50,13 +50,10 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
 
   return (
     <>
-      <div>
-        <span htmlFor="part-type">What type of part is it?</span>
-      </div>
-
-      <div>
-        <label htmlFor="category">Part Category (required):</label>
+      <div className='select-container'>
+        <label className='select-label' htmlFor="category">Part Category<sup>*</sup>:</label>
         <select
+          className='select'
           id='category'
           name="part-category"
           value={catId}
@@ -65,20 +62,23 @@ const PartTypeSelect = ({ setTypeId, typeId }) => {
           <option value="" disabled>Choose a part category</option>
           {partCatOptions}
         </select>
-
-        <label htmlFor="type">Part Type (required):</label>
-        <select
-          id='type'
-          name="part-type"
-          value={typeId}
-          onChange={(e) => setTypeId(e.target.value)}
-        >
-          <option value="" disabled >{ catId ? 'Choose a part type' : '-' }</option>
-          {partTypeOptions}
-        </select>
+        
+        <div className="nested-select-container">
+          <label className='select-label' htmlFor="type">Part Type<sup>*</sup>:</label>
+          <select
+            className='select'
+            id='type'
+            name="part-type"
+            value={typeId}
+            onChange={(e) => setTypeId(e.target.value)}
+          >
+            <option value="" disabled >{ catId ? 'Choose a part type' : '-' }</option>
+            {partTypeOptions}
+          </select>
+        </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default PartTypeSelect
+export default PartTypeSelect;
