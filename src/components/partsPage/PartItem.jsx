@@ -10,6 +10,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 const PartItem = ({ partData, categoryId, setParts }) => {
   const [ editMode, setEditMode ] = useState(false);
   const [ showChildren, setShowChildren ] = useState(false);
+  const [ showDeleteOptions, setShowDeleteOptions ] = useState(false);
 
   // console.log('partData:', partData);
 
@@ -24,11 +25,12 @@ const PartItem = ({ partData, categoryId, setParts }) => {
   }
 
   const handleDeletePart = async () => {
-    if (
-      confirm(
-        `Are you sure you want to delete this part:\n-${partData.name} (build: ${buildName})`
-      )
-    ) {
+    // if (
+    //   confirm(
+    //     `Are you sure you want to delete this part:\n-${partData.name} (build: ${buildName})`
+    //   )
+    // ) 
+    // {
       const res = await axios.delete(`/api/delete-part/${partData.id}`)
 
       if (res.data.success) {
@@ -37,7 +39,7 @@ const PartItem = ({ partData, categoryId, setParts }) => {
         if (res.data.success) {
           setParts(res.data.partsData)
         };
-      };
+      // };
     };
   };
 
@@ -58,7 +60,7 @@ const PartItem = ({ partData, categoryId, setParts }) => {
           </button>
           <button
             className='tertiary-icon-red'
-            onClick={handleDeletePart}
+            onClick={() => setShowDeleteOptions(true)}
           >
             <MdDelete />
           </button>
@@ -87,6 +89,43 @@ const PartItem = ({ partData, categoryId, setParts }) => {
               toViewMode={toViewMode}
               setParts={setParts}
             />
+          </div>
+        </>
+      }
+
+      {showDeleteOptions &&
+        <>
+          <div className="overlay" />
+          <div className="modal">
+            <div className="modal-x-container">
+              <button onClick={() => setShowDeleteOptions(false)}>
+                <HiMiniXMark className='modal-x-icon' />
+              </button>
+            </div>
+            <div className="modal-title-container">
+              <h2>Delete <i>{partData.name}</i>?</h2>
+              <p className='text-sm'>This action can't be undone.</p>
+            </div>
+            <form
+              className="modal-form"
+              onSubmit={handleDeletePart}
+            >
+              <div id='buttons-container' className='modal-bottom-btns-container'>
+                <button
+                  className='btn-cancel'
+                  type='button' 
+                  onClick={() => setShowDeleteOptions(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className='btn-delete'
+                  type="submit"
+                >
+                  Delete
+                </button>
+              </div>
+            </form>
           </div>
         </>
       }
