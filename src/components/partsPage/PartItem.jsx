@@ -24,22 +24,17 @@ const PartItem = ({ partData, categoryId, setParts }) => {
     setEditMode(false)
   }
 
-  const handleDeletePart = async () => {
-    // if (
-    //   confirm(
-    //     `Are you sure you want to delete this part:\n-${partData.name} (build: ${buildName})`
-    //   )
-    // ) 
-    // {
-      const res = await axios.delete(`/api/delete-part/${partData.id}`)
+  const handleDeletePart = async (e) => {
+    e.preventDefault();
+
+    const res = await axios.delete(`/api/delete-part/${partData.id}`)
+
+    if (res.data.success) {
+      const res = await axios.get('/api/parts');
 
       if (res.data.success) {
-        const res = await axios.get('/api/parts');
-
-        if (res.data.success) {
-          setParts(res.data.partsData)
-        };
-      // };
+        setParts(res.data.partsData)
+      };
     };
   };
 
