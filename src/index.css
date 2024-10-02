@@ -89,6 +89,30 @@
     @apply border-2 border-blue-medium rounded-md p-1;
    }
 
+   .select-container {
+    @apply flex flex-col;
+   }
+
+   .select-label {
+    @apply text-base;
+   }
+   
+   .select {
+    @apply border-2 border-blue-medium rounded-md p-1 pr-2 h-9;
+   }
+
+   .text-area-container {
+    @apply flex flex-col;
+   }
+
+   .text-area-label {
+    @apply text-base;
+   }
+
+   .text-area-field {
+    @apply border-2 border-blue-medium rounded-md p-1;
+   }
+
    /* Buttons */
    .btn-cancel {
     @apply text-gray-400 bg-white border-2 border-gray-400 rounded-md px-4 py-1;

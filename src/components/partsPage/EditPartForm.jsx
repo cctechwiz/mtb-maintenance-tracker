@@ -5,8 +5,8 @@ import axios from 'axios';
 const EditPartForm = ({ partData, toViewMode, setParts }) => {
   const [ name, setName ] = useState(partData.name);
   const [ buildId, setBuildId ] = useState(partData.builds[0]?.id || false);
-  const [ milesInt, setMilesInt ] = useState(partData.milesInt || '');
-  const [ hoursInt, setHoursInt ] = useState(partData.hoursInt || '');
+  // const [ milesInt, setMilesInt ] = useState(partData.milesInt || '');
+  // const [ hoursInt, setHoursInt ] = useState(partData.hoursInt || '');
   const [ mfrPartNum, setMfrPartNum ] = useState(partData.mfrPartNum || '');
   const [ serialNum, setSerialNum ] = useState(partData.serialNum || '');
   const [ brand, setBrand ] = useState(partData.brand || '');
@@ -25,8 +25,8 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       partId: partData.id,
       name,
       buildId,
-      milesInt,
-      hoursInt,
+      // milesInt,
+      // hoursInt,
       mfrPartNum,
       serialNum,
       brand,
@@ -49,11 +49,12 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
   };
 
   return (
-    <form onSubmit={(e) => handleEdit(e)}>
+    <form className='modal-form' onSubmit={(e) => handleEdit(e)}>
       {/* Part Name */}
-      <div>
-        <label htmlFor="edit-name">Name:</label>
+      <div className='input-container'>
+        <label className='input-label' htmlFor="edit-name">Name:</label>
         <input
+          className='input-field'
           id='edit-name'
           value={name}
           type="text"
@@ -63,38 +64,41 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Type Id */}
-      <div>
+      <div className='select-container'>
         <EditBuildSelect buildId={buildId} setBuildId={setBuildId} />
       </div>
       
       {/* Miles Interval */}
-      <div>
-        <label htmlFor="edit-miles-int">Manufacturer Miles Service Interval:</label>
+      {/* <div className='input-container'>
+        <label className='input-label' htmlFor="edit-miles-int">Manufacturer Miles Service Interval:</label>
         <input 
+          className='input-field'
           value={milesInt}
           id="edit-miles-int"
           type="number"
           placeholder='e.g. 200'
           onChange={(e) => setMilesInt(e.target.value)}
         />
-      </div>
+      </div> */}
 
       {/* Hours Interval */}
-      <div>
-        <label htmlFor="edit-hours-int">Manufacturer Hours Service Interval:</label>
+      {/* <div className='input-container'>
+        <label className='input-label' htmlFor="edit-hours-int">Manufacturer Hours Service Interval:</label>
         <input 
+          className='input-field'
           value={hoursInt}
           id="edit-hours-int"
           type="number"
           placeholder='e.g. 50'
           onChange={(e) => setHoursInt(e.target.value)}
         />
-      </div>
+      </div> */}
 
       {/* Mfr partNumber */}
-      <div>
-        <label htmlFor="edit-mfr-part-num">Manufacturer Part Number:</label>
+      <div className='input-container'>
+        <label className='input-label' htmlFor="edit-mfr-part-num">Manufacturer Part Number:</label>
         <input
+          className='input-field'
           id='edit-mfr-part-num'
           value={mfrPartNum}
           type="text"
@@ -104,9 +108,10 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Serial Number */}
-      <div>
-        <label htmlFor="edit-serial-num">Serial Number:</label>
+      <div className='input-container'>
+        <label className='input-label' htmlFor="edit-serial-num">Serial Number:</label>
         <input
+          className='input-field'
           id='edit-serial-num'
           value={serialNum}
           type="text"
@@ -116,9 +121,10 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Brand */}
-      <div>
-        <label htmlFor="edit-brand">Brand Name:</label>
+      <div className='input-container'>
+        <label className='input-label' htmlFor="edit-brand">Brand Name:</label>
         <input
+          className='input-field'
           id='edit-brand'
           value={brand}
           type="text"
@@ -128,9 +134,10 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Model Year */}
-      <div>
-        <label htmlFor="edit-model-year">Model Year:</label>
+      <div className='input-container'>
+        <label className='input-label' htmlFor="edit-model-year">Model Year:</label>
         <input
+          className='input-field'
           id='edit-model-year'
           value={modelYear}
           type="number"
@@ -140,9 +147,10 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
       </div>
 
       {/* Notes */}
-      <div>
-          <label htmlFor="edit-notes">Part Notes/Details</label>
+      <div className='text-area-container'>
+          <label className='text-area-label' htmlFor="edit-notes">Part Notes/Details</label>
           <textarea
+            className='text-area-field'
             id='edit-notes'
             value={notes}
             placeholder='Notes'
@@ -150,8 +158,20 @@ const EditPartForm = ({ partData, toViewMode, setParts }) => {
           ></textarea>
         </div>
 
-      <div>
-        <input type="submit" />
+      <div className='modal-bottom-btns-container'>
+        <button
+          className='btn-cancel'
+          onClick={toViewMode}
+          type="button"
+        >
+          Cancel
+        </button>
+        <button
+          className='btn-submit'
+          type="submit"
+        >
+          Submit
+        </button>
       </div>
 
     </form>

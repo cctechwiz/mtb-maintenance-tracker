@@ -5,6 +5,7 @@ import { Collapse } from 'react-collapse';
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { PiCaretDownBold, PiCaretUpBold } from "react-icons/pi";
+import { HiMiniXMark } from "react-icons/hi2";
 
 const PartItem = ({ partData, categoryId, setParts }) => {
   const [ editMode, setEditMode ] = useState(false);
@@ -40,7 +41,7 @@ const PartItem = ({ partData, categoryId, setParts }) => {
     };
   };
 
-  return !editMode ? (
+  return (
     <li>
       <div className='tertiary-row-container'>
         <div className="tertiary-title-container">
@@ -66,24 +67,37 @@ const PartItem = ({ partData, categoryId, setParts }) => {
           {!showChildren ? <PiCaretDownBold /> : <PiCaretUpBold />}
         </button>
       </div>
+
+      {editMode &&
+        <>
+          <div className="overlay"/>
+          <div id='edit-modal' className='modal'>
+            <div className="modal-x-container">
+              <button onClick={toViewMode}>
+                <HiMiniXMark className='modal-x-icon' />
+              </button>
+            </div>
+            <div className="modal-title-container">
+              <h2>Edit <i>{partData.name}</i> Part</h2>
+            </div>
+
+            <EditPartForm
+              partData={partData}
+              categoryId={categoryId}
+              toViewMode={toViewMode}
+              setParts={setParts}
+            />
+          </div>
+        </>
+      }
+
       <Collapse isOpened={showChildren}>
         <div className="quaternary-items-container">
           <span>Installed on: {buildName}</span>
         </div>
       </Collapse>
     </li>
-  ) : (
-    <li>
-      Edit Mode is on for { partData.name }
-      <button onClick={toViewMode}>Cancel</button>
-      <EditPartForm
-        partData={partData}
-        categoryId={categoryId}
-        toViewMode={toViewMode}
-        setParts={setParts}
-      />
-    </li>
   )
 }
 
-export default PartItem
+export default PartItem;

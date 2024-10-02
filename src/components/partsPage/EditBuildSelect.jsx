@@ -24,8 +24,9 @@ const EditBuildSelect = ({ buildId, setBuildId }) => {
 
   return (
     <>
-      <label htmlFor="builds-select">Installed on:</label>
+      <label className='select-label' htmlFor="builds-select">Installed on:</label>
       <select
+        className='select'
         name="builds"
         id="builds-select"
         value={buildId}
