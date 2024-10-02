@@ -34,9 +34,14 @@ const Builds = () => {
         </button>
       </div>
 
-      {displayForm && <NewBuildForm setUserBuilds={setUserBuilds} setDisplayForm={setDisplayForm} />}
+      {displayForm &&
+        <NewBuildForm
+          setUserBuilds={setUserBuilds}
+          setDisplayForm={setDisplayForm}
+        />
+      }
         
-      <div id='primary-container'>
+      <div id='cards-container'>
         { buildItems }
       </div>
     </div>
