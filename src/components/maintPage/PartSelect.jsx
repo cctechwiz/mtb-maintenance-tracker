@@ -85,12 +85,13 @@ const PartSelect = ({ partId, setPartId }) => {
 
   return (
     <div>
-      <div>Select a Part</div>
+      <h3>Select a Part</h3>
 
       {/* Build Select */}
-      <div>
-        <label htmlFor="build">From Build:</label>
-        <select 
+      <div className='select-container'>
+        <label className='select-label' htmlFor="build">From Build:</label>
+        <select
+          className='select'
           value={buildId}
           name="build" 
           id="build"
@@ -101,34 +102,36 @@ const PartSelect = ({ partId, setPartId }) => {
           <option value="-" disabled>-</option>
           <option value="false">Not installed</option>
         </select>
-      </div>
+      
+        {/* Category Select */}
+        <div className='nested-select-container'>
+          <label className='select-label' htmlFor="category">In Category:</label>
+          <select
+            className='select'
+            value={catId}
+            name="category" 
+            id="category"
+            onChange={(e) => setCatId(e.target.value)}
+          >
+            <option value="" disabled>Choose a category</option>
+            { buildId && catOptions }
+          </select>
 
-      {/* Category Select */}
-      <div>
-        <label htmlFor="category">In Category:</label>
-        <select 
-          value={catId}
-          name="category" 
-          id="category"
-          onChange={(e) => setCatId(e.target.value)}
-        >
-          <option value="" disabled>Choose a category</option>
-          { buildId && catOptions }
-        </select>
-      </div>
-
-      {/* Part Select */}
-      <div>
-        <label htmlFor="part">Part:</label>
-        <select 
-          value={partId}
-          name="part" 
-          id="part"
-          onChange={(e) => setPartId(e.target.value)}
-        >
-          <option value="" disabled>Choose a part</option>
-          { partOptions }
-        </select>
+          {/* Part Select */}
+          <div className='nested-select-container'>
+            <label className='select-label' htmlFor="part">Part:</label>
+            <select
+              className='select'
+              value={partId}
+              name="part" 
+              id="part"
+              onChange={(e) => setPartId(e.target.value)}
+            >
+              <option value="" disabled>Choose a part</option>
+              { partOptions }
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
