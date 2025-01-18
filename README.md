@@ -41,7 +41,7 @@ A web application to track and manage maintenance for your mountain bikes. Organ
 ### Prerequisites
 
 - Node.js and npm
-- PostgreSQL
+- Docker
 
 ### Installation Steps
 
@@ -58,9 +58,10 @@ A web application to track and manage maintenance for your mountain bikes. Organ
    npm install
    ```
 
-3. Initialize the database:
+3. Start & Initialize the database:
 
    ```bash
+   npm run startdb
    npm run initdb
    ```
 
@@ -80,6 +81,13 @@ A web application to track and manage maintenance for your mountain bikes. Organ
    - Once the server starts, a link to the app (e.g., `Server running on http://localhost:8080`) will be printed to the console.
    - If using VSCode, hover the cursor over the url and follow the instructions in the window that appears.
    - Alternatively, copy the URL and paste it into your browser's address bar.
+
+7. Cleanup database after dev:
+
+   ```bash
+   npm run stopdb
+   npm run rmdb # to delete all data
+   ```
 
 ---
 
