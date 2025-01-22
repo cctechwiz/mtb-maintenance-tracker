@@ -8,7 +8,10 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "initdb": "dropdb --if-exists mtbmt && createdb mtbmt",
+    "startdb": "docker run --name mtb-psql -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres",
+    "initdb": "dropdb --user postgres --password --host localhost --port 5432 --if-exists mtbmt && createdb --user postgres --password --host localhost --port 5432 mtbmt",
+    "stopdb": "docker stop mtb-psql",
+    "rmdb": "docker rm mtb-psql",
     "seed": "node db/seed.js"
   },
   "dependencies": {
@@ -40,6 +43,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "nodemon": "^3.1.9",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.1"
